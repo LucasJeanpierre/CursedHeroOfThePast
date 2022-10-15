@@ -12,9 +12,9 @@ In the prototype the color of the Character change according to the time.
 ### Object in game
 The tokens of the level will be visible or not if the current time if the correct one.
 
-![Time 0](https://github.com/LucasJeanpierre/CursedHeroOfThePast/Prototype/blob/Assets/Images/DefaultPlayerAndTime.png)
-![Time +7](https://github.com/LucasJeanpierre/CursedHeroOfThePast/Prototype/blob/Assets/Images/PlayerWithPlus7Time.png)
-![Time -7](https://github.com/LucasJeanpierre/CursedHeroOfThePast/Prototype/blob/Assets/Images/PlayerWithMinus7Time.png)
+![Time 0](https://raw.githubusercontent.com/LucasJeanpierre/CursedHeroOfThePast/Prototype/Assets/Images/DefaultPlayerAndTime.png)
+![Time +7](https://raw.githubusercontent.com/LucasJeanpierre/CursedHeroOfThePast/Prototype/Assets/Images/PlayerWithPlus7Time.png)
+![Time -7](https://raw.githubusercontent.com/LucasJeanpierre/CursedHeroOfThePast/Prototype/Assets/Images/PlayerWithMinus7Time.png)
 
 ### Change the value of the time variable
 The '1' key on the alphanumeric keyboard decrements the time value by 1.
