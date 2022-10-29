@@ -5,6 +5,7 @@ using Platformer.Gameplay;
 using static Platformer.Core.Simulation;
 using Platformer.Model;
 using Platformer.Core;
+using System;
 
 namespace Platformer.Mechanics
 {
@@ -42,6 +43,17 @@ namespace Platformer.Mechanics
 
         public Bounds Bounds => collider2d.bounds;
 
+        private List<Vector3> _rewindList = new List<Vector3>();
+        private Boolean _onRewind = false;
+
+        [SerializeField] private StaticPlayerOnRewind _staticPlayerOnRewind;
+        private Vector3 _lastPositionBeforeRewind;
+        private Transform _transform;
+        private Rigidbody2D _rigidbody2D;
+
+        private StaticPlayerOnRewind staticPlayerOnRewind;
+
+
         void Awake()
         {
             health = GetComponent<Health>();
@@ -49,10 +61,45 @@ namespace Platformer.Mechanics
             collider2d = GetComponent<Collider2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
+            _rigidbody2D = GetComponent<Rigidbody2D>();
+            _transform = this.transform;
         }
 
         protected override void Update()
         {
+
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+
+                StartRewinding();
+            }
+
+            if (Input.GetKeyUp(KeyCode.Backspace))
+            {
+
+                StopRewinding();
+            }
+
+            if (_onRewind)
+            {
+                Rewind();
+            }
+            else
+            {
+                Vector2 current_pos = new Vector2(_transform.position.x, _transform.position.y);
+                Vector2 new_pos = Vector2.zero;
+                new_pos.x = transform.position.x;
+                new_pos.y = transform.position.y;
+                _lastPositionBeforeRewind = new_pos;
+                // if (current_pos!=new_pos){
+                //     _rewindList.Add(new_pos);
+                // }
+                _rewindList.Add(new_pos);
+
+
+                //_rigidbody2D.MovePosition(new_pos);
+            }
+
             if (controlEnabled)
             {
                 move.x = Input.GetAxis("Horizontal");
@@ -70,6 +117,42 @@ namespace Platformer.Mechanics
             }
             UpdateJumpState();
             base.Update();
+        }
+
+        private void StartRewinding()
+        {
+            _onRewind = true;
+            staticPlayerOnRewind = Instantiate(_staticPlayerOnRewind, _lastPositionBeforeRewind, _transform.rotation);
+            controlEnabled = false;
+
+        }
+
+        private void StopRewinding()
+        {
+            _onRewind = false;
+            controlEnabled = true;
+            staticPlayerOnRewind.Destroy();
+        }
+
+        private void Rewind()
+        {
+
+
+            int l = _rewindList.Count;
+            if (l > 0)
+            {
+                // Debug.Log(l);
+                Vector3 to_move = _rewindList[l - 1];
+                _rewindList.RemoveAt(l - 1);
+                //_rigidbody2D.MovePosition(to_move);
+                _transform.position = to_move;
+
+            }
+            else
+            {
+                //_rigidbody2D.MovePosition(_transform.position);
+            }
+
         }
 
         void UpdateJumpState()
