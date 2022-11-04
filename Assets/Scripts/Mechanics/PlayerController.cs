@@ -68,13 +68,13 @@ namespace Platformer.Mechanics
         protected override void Update()
         {
 
-            if (Input.GetKeyDown(KeyCode.Backspace))
+            if (Input.GetKeyDown(KeyCode.Backspace) && _onRewind == false)
             {
 
                 StartRewinding();
             }
 
-            if (Input.GetKeyUp(KeyCode.Backspace))
+            if (Input.GetKeyDown(KeyCode.Backspace) && _onRewind == true)
             {
 
                 StopRewinding();
@@ -122,6 +122,7 @@ namespace Platformer.Mechanics
         private void StartRewinding()
         {
             _onRewind = true;
+            //Vector3 newPos = _lastPositionBeforeRewind - new Vector3(0, 1f, 0);
             staticPlayerOnRewind = Instantiate(_staticPlayerOnRewind, _lastPositionBeforeRewind, _transform.rotation);
             controlEnabled = false;
 
