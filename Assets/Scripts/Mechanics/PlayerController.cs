@@ -119,19 +119,24 @@ namespace Platformer.Mechanics
             base.Update();
         }
 
-        private void StartRewinding()
+        public void StartRewinding()
         {
             _onRewind = true;
             staticPlayerOnRewind = Instantiate(_staticPlayerOnRewind, _lastPositionBeforeRewind, _transform.rotation);
             staticPlayerOnRewind.setRewindList(_rewindList);
+            staticPlayerOnRewind.setPlayerController(this);
             //controlEnabled = false;
 
         }
 
-        private void StopRewinding()
+        public void StopRewinding()
         {
             _onRewind = false;
-            Destroy(staticPlayerOnRewind.gameObject);
+            if (staticPlayerOnRewind != null)
+            {
+                Destroy(staticPlayerOnRewind.gameObject);
+            }
+            _rewindList = new List<Vector3>();
             //staticPlayerOnRewind.setOnRewind(false);
             //controlEnabled = true;
             //staticPlayerOnRewind.Destroy();

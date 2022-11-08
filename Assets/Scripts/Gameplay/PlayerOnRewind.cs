@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Platformer.Mechanics;
 
 public class PlayerOnRewind : MonoBehaviour
 {
 
     private List<Vector3> _rewindList = new List<Vector3>();
+    private PlayerController _playerController;
     private Transform _transform;
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,7 @@ public class PlayerOnRewind : MonoBehaviour
         {
             //_rigidbody2D.MovePosition(_transform.position);
             Destroy(gameObject);
+            _playerController.StopRewinding();
         }
 
     }
@@ -45,6 +48,10 @@ public class PlayerOnRewind : MonoBehaviour
     public void setRewindList(List<Vector3> rewindList)
     {
         _rewindList = rewindList;
+    }
+    public void setPlayerController(PlayerController playerController)
+    {
+        _playerController = playerController;
     }
 
 
