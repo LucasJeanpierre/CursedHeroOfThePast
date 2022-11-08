@@ -63,7 +63,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   health: {fileID: 0}
   controlEnabled: 1
-  _staticPlayerOnRewind: {fileID: -269467123467717994, guid: 87bf45b3e16b8d241bdfbca6bb68a57f,
+  _staticPlayerOnRewind: {fileID: 6649479971312759359, guid: 87bf45b3e16b8d241bdfbca6bb68a57f,
     type: 3}
 --- !u!212 &212064061491315838
 SpriteRenderer:

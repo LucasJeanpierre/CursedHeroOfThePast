@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 8509783501685719824}
   - component: {fileID: 6082575806313374961}
   - component: {fileID: 1824045667}
-  - component: {fileID: -269467123467717994}
+  - component: {fileID: 6649479971312759359}
   m_Layer: 13
-  m_Name: StaticPlayerOnRewinding
+  m_Name: PlayerOnRewinding
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,6 +64,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   health: {fileID: 0}
   controlEnabled: 1
+  _staticPlayerOnRewind: {fileID: 0}
 --- !u!212 &212064061491315838
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -292,7 +293,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.32, y: 0.54}
   m_EdgeRadius: 0
---- !u!114 &-269467123467717994
+--- !u!114 &6649479971312759359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -301,6 +302,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1208144871472054}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2f6590776543c1499484da725ed9dab, type: 3}
+  m_Script: {fileID: 11500000, guid: 043f133062342064185bacdf154cc276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -46,12 +46,12 @@ namespace Platformer.Mechanics
         private List<Vector3> _rewindList = new List<Vector3>();
         private Boolean _onRewind = false;
 
-        [SerializeField] private StaticPlayerOnRewind _staticPlayerOnRewind;
+        [SerializeField] private PlayerOnRewind _staticPlayerOnRewind;
         private Vector3 _lastPositionBeforeRewind;
         private Transform _transform;
         private Rigidbody2D _rigidbody2D;
 
-        private StaticPlayerOnRewind staticPlayerOnRewind;
+        private PlayerOnRewind staticPlayerOnRewind;
 
 
         void Awake()
@@ -68,21 +68,21 @@ namespace Platformer.Mechanics
         protected override void Update()
         {
 
-            if (Input.GetKeyDown(KeyCode.Backspace))
+            if (Input.GetKeyDown(KeyCode.Backspace) && (_onRewind == true))
             {
-
+                StopRewinding();
+            } else if (Input.GetKeyDown(KeyCode.Backspace) && (_onRewind == false))
+            {
                 StartRewinding();
             }
 
-            if (Input.GetKeyUp(KeyCode.Backspace))
-            {
+            
 
-                StopRewinding();
-            }
+
 
             if (_onRewind)
             {
-                Rewind();
+                //Rewind();
             }
             else
             {
@@ -123,15 +123,18 @@ namespace Platformer.Mechanics
         {
             _onRewind = true;
             staticPlayerOnRewind = Instantiate(_staticPlayerOnRewind, _lastPositionBeforeRewind, _transform.rotation);
-            controlEnabled = false;
+            staticPlayerOnRewind.setRewindList(_rewindList);
+            //controlEnabled = false;
 
         }
 
         private void StopRewinding()
         {
             _onRewind = false;
-            controlEnabled = true;
-            staticPlayerOnRewind.Destroy();
+            Destroy(staticPlayerOnRewind.gameObject);
+            //staticPlayerOnRewind.setOnRewind(false);
+            //controlEnabled = true;
+            //staticPlayerOnRewind.Destroy();
         }
 
         private void Rewind()
