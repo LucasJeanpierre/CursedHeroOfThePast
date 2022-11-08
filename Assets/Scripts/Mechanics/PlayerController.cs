@@ -134,6 +134,7 @@ namespace Platformer.Mechanics
             _onRewind = false;
             if (staticPlayerOnRewind != null)
             {
+                _transform.position = staticPlayerOnRewind.transform.position;
                 Destroy(staticPlayerOnRewind.gameObject);
             }
             _rewindList = new List<Vector3>();
