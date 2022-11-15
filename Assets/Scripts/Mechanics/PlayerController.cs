@@ -53,6 +53,14 @@ namespace Platformer.Mechanics
 
         private PlayerOnRewind staticPlayerOnRewind;
 
+        private float _facingDirection = 1f;
+        private bool canDash = true;
+        private bool isDashing;
+        public float dashingPower = 2f;
+        private float dashingTime = 0.2f;
+        private float dashingCooldown = 1f;
+
+        [SerializeField] private TrailRenderer tr;
 
         void Awake()
         {
@@ -66,7 +74,19 @@ namespace Platformer.Mechanics
         }
 
         protected override void Update()
-        {
+        {   
+            
+            _facingDirection = Input.GetAxis("Horizontal")!=0 ? Input.GetAxis("Horizontal") : _facingDirection;
+
+            if(isDashing)
+            {
+                return; 
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+            {
+                StartCoroutine("Dash");
+            }
 
             if (Input.GetKeyDown(KeyCode.Backspace) && (_onRewind == true))
             {
@@ -75,10 +95,6 @@ namespace Platformer.Mechanics
             {
                 StartRewinding();
             }
-
-            
-
-
 
             if (_onRewind)
             {
@@ -228,6 +244,25 @@ namespace Platformer.Mechanics
             Jumping,
             InFlight,
             Landed
+        }
+
+
+        private IEnumerator Dash(){
+            float dashAmount = dashingPower * Mathf.Sign(_facingDirection);
+            canDash = false;
+            isDashing = true;
+            float originalGravity = _rigidbody2D.gravityScale;
+            _rigidbody2D.gravityScale = 0;
+            _rigidbody2D.velocity += new Vector2(dashAmount, 0);
+            tr.emitting = true;
+            yield return new WaitForSeconds(dashingTime);
+            tr.emitting = false;
+            _rigidbody2D.velocity -= new Vector2(dashAmount, 0);
+            _rigidbody2D.gravityScale = originalGravity;
+            isDashing = false;
+            yield return new WaitForSeconds(dashingCooldown);
+            canDash = true;
+
         }
     }
 }
