@@ -8,8 +8,10 @@ public class Button : MonoBehaviour
 {
     public Button otherButton;
     public Door door;
-    public bool isPressed = false;
+    private bool isPressed = false;
     private int nbcollision = 0;
+    [SerializeField] private float _buttonDelayOnRelease = 0.2f;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -30,9 +32,7 @@ public class Button : MonoBehaviour
         nbcollision--;
         if (nbcollision == 0)
         {
-
-            isPressed = false;
-            GetComponent<SpriteRenderer>().color = Color.white;
+            StartCoroutine("unPressButtonAfterDelay");
         }
     }
 
@@ -50,9 +50,15 @@ public class Button : MonoBehaviour
         }
     }
 
-    IEnumerator Wait()
+    private void unPressButton()
     {
-        //yield on a new YieldInstruction that waits for 5 seconds.
-        yield return new WaitForSeconds(3);
+        isPressed = false;
+        GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    IEnumerator unPressButtonAfterDelay()
+    {
+        yield return new WaitForSeconds(_buttonDelayOnRelease);
+        unPressButton();
     }
 }
