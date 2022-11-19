@@ -75,7 +75,7 @@ namespace Platformer.Mechanics
 
         protected override void Update()
         {   
-            
+            Debug.Log(velocity.y);
             _facingDirection = Input.GetAxis("Horizontal")!=0 ? Input.GetAxis("Horizontal") : _facingDirection;
 
             if(isDashing)
@@ -224,6 +224,8 @@ namespace Platformer.Mechanics
                 {
                     velocity.y = velocity.y * model.jumpDeceleration;
                 }
+            }else if(isDashing){
+                velocity.y=0;
             }
 
             if (move.x > 0.01f)
@@ -251,14 +253,13 @@ namespace Platformer.Mechanics
             float dashAmount = dashingPower * Mathf.Sign(_facingDirection);
             canDash = false;
             isDashing = true;
-            float originalGravity = _rigidbody2D.gravityScale;
-            _rigidbody2D.gravityScale = 0;
+            Debug.Log("Stop gravity");
             _rigidbody2D.velocity += new Vector2(dashAmount, 0);
             tr.emitting = true;
             yield return new WaitForSeconds(dashingTime);
             tr.emitting = false;
             _rigidbody2D.velocity -= new Vector2(dashAmount, 0);
-            _rigidbody2D.gravityScale = originalGravity;
+            Debug.Log("Start gravity");
             isDashing = false;
             yield return new WaitForSeconds(dashingCooldown);
             canDash = true;
