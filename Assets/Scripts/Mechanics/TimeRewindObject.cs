@@ -11,6 +11,7 @@ public class TimeRewindObject
     public TimeRewindObject(Transform transform, bool available)
     {
         _transform = transform;
+        _available = available;
     }
 
     public bool GetAvailable()

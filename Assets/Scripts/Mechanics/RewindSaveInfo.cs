@@ -17,14 +17,22 @@ public class RewindSaveInfo : MonoBehaviour
 
     private void FixedUpdate()
     {
+        _transform = GetComponent<Transform>();
         IncrementRewindingList();
-    
     }
 
 
     public void IncrementRewindingList()
     {
-        AddTimeRewindObject(CreateTimeRewindObject(), (float) System.Math.Round(Time.time,2));
+        try
+        {
+            AddTimeRewindObject(CreateTimeRewindObject(), (float) System.Math.Round(Time.time,2));
+        }
+        catch (System.Exception)
+        {
+           // Debug.Log("Already exists");
+        }
+        
     }
 
     public TimeRewindObject CreateTimeRewindObject()
@@ -35,6 +43,19 @@ public class RewindSaveInfo : MonoBehaviour
     public void AddTimeRewindObject(TimeRewindObject timeRewindObject, float time)
     {
         _timeRewindObjects.Add(time, timeRewindObject);
-        Debug.Log(time);
+        //Debug.Log("Current time: " + time + " | " + "Current rotation: " + _timeRewindObjects[time].GetTransform().rotation);
+    }
+
+    public TimeRewindObject GetTimeRewindObjectAccordingToTime(float time)
+    {
+        return _timeRewindObjects[time];
+    }
+
+    /*
+    return length of the _timeRewindObjects
+     */
+    public int GetLength()
+    {
+        return _timeRewindObjects.Count;
     }
 }
