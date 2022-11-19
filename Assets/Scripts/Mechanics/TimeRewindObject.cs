@@ -5,12 +5,17 @@ using UnityEngine;
 public class TimeRewindObject
 {
 
-    private Transform _transform;
+    private Vector3 _position;
+    private Quaternion _rotation;
+    private Vector3 _scale;
+
     private bool _available;
 
-    public TimeRewindObject(Transform transform, bool available)
+    public TimeRewindObject(Vector3 position, Quaternion rotation, Vector3 scale, bool available)
     {
-        _transform = transform;
+        _position = position;
+        _rotation = rotation;
+        _scale = scale;
         _available = available;
     }
 
@@ -19,9 +24,24 @@ public class TimeRewindObject
         return _available;
     }
 
-    public Transform GetTransform()
+    public void SetAvailable(bool available)
     {
-        return _transform;
+        _available = available;
+    }
+
+    public Vector3 GetPosition()
+    {
+        return _position;
+    }
+
+    public Quaternion GetRotation()
+    {
+        return _rotation;
+    }
+
+    public Vector3 GetScale()
+    {
+        return _scale;
     }
 
 }

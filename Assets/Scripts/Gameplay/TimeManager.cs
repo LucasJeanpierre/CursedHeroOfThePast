@@ -7,6 +7,8 @@ public class TimeManager : MonoBehaviour
 {
 
     [SerializeField] private float Time = 0.0f;
+
+    [SerializeField] private List<GameObject> _ListOfRewindObjects;
     public Text TimeText;
 
     // Update is called once per frame
@@ -27,6 +29,14 @@ public class TimeManager : MonoBehaviour
             Time -= 1.0f;
         }
         #endif
+    }
+
+    public void RewindAllAffectedObjects(float time)
+    {
+        foreach (var rewindObject in _ListOfRewindObjects)
+        {
+            rewindObject.GetComponent<RewindSaveInfo>().RewindTo(Time);
+        }
     }
 
     /**

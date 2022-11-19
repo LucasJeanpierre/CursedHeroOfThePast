@@ -56,6 +56,8 @@ namespace Platformer.Mechanics
 
         private PlayerOnRewind staticPlayerOnRewind;
 
+        [SerializeField] private TimeManager _timeManager;
+
 
         void Awake()
         {
@@ -123,9 +125,11 @@ namespace Platformer.Mechanics
 
         public void StartRewinding()
         {
+            Debug.Log("Start Rewinding");
             _onRewind = true;
             staticPlayerOnRewind = Instantiate(_staticPlayerOnRewind, _lastPositionBeforeRewind, _transform.rotation);
             staticPlayerOnRewind.setRewindSaveInfo(rewindSaveInfo);
+        
             staticPlayerOnRewind.setPlayerController(this);
             //controlEnabled = false;
 
@@ -137,6 +141,7 @@ namespace Platformer.Mechanics
             if (staticPlayerOnRewind != null)
             {
                 _transform.position = staticPlayerOnRewind.transform.position;
+                _timeManager.RewindAllAffectedObjects(staticPlayerOnRewind.getCurrentTimeRewind());
                 Destroy(staticPlayerOnRewind.gameObject);
             }
             //_rewindList = new List<Vector3>();
