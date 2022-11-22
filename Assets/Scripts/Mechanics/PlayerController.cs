@@ -40,7 +40,7 @@ namespace Platformer.Mechanics
         Vector2 move;
         SpriteRenderer spriteRenderer;
         internal Animator animator;
-            readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
+        readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
         public Bounds Bounds => collider2d.bounds;
 
@@ -214,6 +214,11 @@ namespace Platformer.Mechanics
 
         protected override void ComputeVelocity()
         {
+            if(isDashing)
+            {
+                velocity.y = 0;
+                return; 
+            }
             if (jump && IsGrounded)
             {
                 velocity.y = jumpTakeOffSpeed * model.jumpModifier;
