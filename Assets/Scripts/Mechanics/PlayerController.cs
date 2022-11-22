@@ -46,12 +46,12 @@ namespace Platformer.Mechanics
         private List<Vector3> _rewindList = new List<Vector3>();
         private Boolean _onRewind = false;
 
-        [SerializeField] private PlayerOnRewind _staticPlayerOnRewind;
+        [SerializeField] private PlayerOnRewind _playerOnRewind;
         private Vector3 _lastPositionBeforeRewind;
         private Transform _transform;
         private Rigidbody2D _rigidbody2D;
 
-        private PlayerOnRewind staticPlayerOnRewind;
+        private PlayerOnRewind PlayerOnRewind;
 
         private StaticPlayerOnRewind _cloneOfPlayerOnRewind;
 
@@ -82,21 +82,17 @@ namespace Platformer.Mechanics
 
 
 
-            if (_onRewind)
+            if(! _onRewind)
             {
-                //Rewind();
-            }
-            else
-            {
-                Vector2 current_pos = new Vector2(_transform.position.x, _transform.position.y);
-                Vector2 new_pos = Vector2.zero;
-                new_pos.x = transform.position.x;
-                new_pos.y = transform.position.y;
-                _lastPositionBeforeRewind = new_pos;
+                // Vector2 current_pos = new Vector2(_transform.position.x, _transform.position.y);
+                // Vector2 new_pos = Vector2.zero;
+                // new_pos.x = transform.position.x;
+                // new_pos.y = transform.position.y;
+                // _lastPositionBeforeRewind = new_pos;
                 // if (current_pos!=new_pos){
                 //     _rewindList.Add(new_pos);
                 // }
-                _rewindList.Add(new_pos);
+                _rewindList.Add(_transform.position);
 
 
                 //_rigidbody2D.MovePosition(new_pos);
@@ -124,29 +120,31 @@ namespace Platformer.Mechanics
         public void StartRewinding()
         {
             _onRewind = true;
-            staticPlayerOnRewind = Instantiate(_staticPlayerOnRewind, _lastPositionBeforeRewind, _transform.rotation);
-            staticPlayerOnRewind.setRewindList(_rewindList);
-            staticPlayerOnRewind.setPlayerController(this);
+            PlayerOnRewind = Instantiate(_playerOnRewind,_transform.position, _transform.rotation);
+            PlayerOnRewind.setRewindList(_rewindList);
+            PlayerOnRewind.setPlayerController(this);
             //controlEnabled = false;
 
         }
 
         public void StopRewinding()
         {
-            _onRewind = false;
-            if (staticPlayerOnRewind != null)
+            
+            if (PlayerOnRewind != null)
             {
-                _cloneOfPlayerOnRewind = staticPlayerOnRewind.getStaticCloneOfThisClone();
+                _cloneOfPlayerOnRewind = PlayerOnRewind.getStaticCloneOfThisClone();
                 if (Exists(_cloneOfPlayerOnRewind)){
                     
                     StartCoroutine("DoubleTP");
 
                 }
                 else{
-                    TP(staticPlayerOnRewind.transform.position);
+                    TP(PlayerOnRewind.transform.position);
                 }
-                Destroy(staticPlayerOnRewind.gameObject);
+                Destroy(PlayerOnRewind.gameObject);
             }
+
+            _onRewind = false;
             //_rewindList = new List<Vector3>();
             //staticPlayerOnRewind.setOnRewind(false);
             //controlEnabled = true;
@@ -189,7 +187,7 @@ namespace Platformer.Mechanics
         IEnumerator DoubleTP(){
 
             Vector3 FirstPosition= _cloneOfPlayerOnRewind.transform.position;
-            Vector3 SecondPosition= staticPlayerOnRewind.transform.position;
+            Vector3 SecondPosition= PlayerOnRewind.transform.position;
             TP(FirstPosition);
             
             Destroy(_cloneOfPlayerOnRewind.gameObject);
