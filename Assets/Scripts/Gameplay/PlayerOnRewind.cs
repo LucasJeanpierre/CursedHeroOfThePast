@@ -10,31 +10,36 @@ public class PlayerOnRewind : MonoBehaviour
     private List<Vector3> _rewindList = new List<Vector3>();
     private PlayerController _playerController;
 
-    private Boolean _isIntermediateStaticClone=false;
+    
+
+    private Boolean _hasClone=false;
     private Transform _transform;
     // Start is called before the first frame update
 
-    [SerializeField] private PlayerOnRewind _intermediateStaticClone;
-    private PlayerOnRewind _intermediateStaticCloneObject;
+    [SerializeField] private StaticPlayerOnRewind _intermediateStaticClone;
+    private StaticPlayerOnRewind _intermediateStaticCloneObject;
 
     void Start()
     {
         _transform = this.transform;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-           if (! _isIntermediateStaticClone)
-           {
+           
+           
             Rewind();
 
-            if (Input.GetKeyDown(KeyCode.B)){
+            if (Input.GetKeyDown(KeyCode.B) && !_hasClone){
                 _intermediateStaticCloneObject=Instantiate(_intermediateStaticClone,_transform.position,_transform.rotation);
-                _intermediateStaticCloneObject.setIntermediateCloneBoolean(true);
+                _hasClone=true;
+                
+                
 
                 }
-           }
+           
     }
 
     private void Rewind()
@@ -75,13 +80,11 @@ public class PlayerOnRewind : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void setIntermediateCloneBoolean(Boolean boolean){
-        _isIntermediateStaticClone=boolean;
-    }
+    
 
 
 
-public PlayerOnRewind getStaticCloneOfThisClone(){
+public StaticPlayerOnRewind getStaticCloneOfThisClone(){
     return _intermediateStaticCloneObject;
 }
 

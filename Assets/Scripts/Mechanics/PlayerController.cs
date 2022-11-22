@@ -53,7 +53,7 @@ namespace Platformer.Mechanics
 
         private PlayerOnRewind staticPlayerOnRewind;
 
-        private PlayerOnRewind _cloneOfPlayerOnRewind;
+        private StaticPlayerOnRewind _cloneOfPlayerOnRewind;
 
 
         void Awake()
@@ -136,7 +136,7 @@ namespace Platformer.Mechanics
             _onRewind = false;
             if (staticPlayerOnRewind != null)
             {
-                _cloneOfPlayerOnRewind =staticPlayerOnRewind.getStaticCloneOfThisClone();
+                _cloneOfPlayerOnRewind = staticPlayerOnRewind.getStaticCloneOfThisClone();
                 if (Exists(_cloneOfPlayerOnRewind)){
                     
                     StartCoroutine("DoubleTP");
@@ -174,7 +174,7 @@ namespace Platformer.Mechanics
 
         }
 
-        private Boolean Exists(PlayerOnRewind cloneofclone){
+        private Boolean Exists(StaticPlayerOnRewind cloneofclone){
                 if (cloneofclone==null){
                  return false;
                 }
