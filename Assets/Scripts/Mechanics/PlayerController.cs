@@ -35,11 +35,12 @@ namespace Platformer.Mechanics
         public Health health;
         public bool controlEnabled = true;
 
+
         bool jump;
         Vector2 move;
         SpriteRenderer spriteRenderer;
         internal Animator animator;
-        readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
+            readonly PlatformerModel model = Simulation.GetModel<PlatformerModel>();
 
         public Bounds Bounds => collider2d.bounds;
 
@@ -61,6 +62,8 @@ namespace Platformer.Mechanics
         private float dashingCooldown = 1f;
 
         [SerializeField] private TrailRenderer tr;
+        
+        //private GravityModifier _gravityModifier;
 
         void Awake()
         {
@@ -70,12 +73,12 @@ namespace Platformer.Mechanics
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
             _rigidbody2D = GetComponent<Rigidbody2D>();
+            //_gravityModifier = GetComponent<gra
             _transform = this.transform;
         }
 
         protected override void Update()
         {   
-            Debug.Log(velocity.y);
             _facingDirection = Input.GetAxis("Horizontal")!=0 ? Input.GetAxis("Horizontal") : _facingDirection;
 
             if(isDashing)
@@ -166,7 +169,6 @@ namespace Platformer.Mechanics
             int l = _rewindList.Count;
             if (l > 0)
             {
-                // Debug.Log(l);
                 Vector3 to_move = _rewindList[l - 1];
                 _rewindList.RemoveAt(l - 1);
                 //_rigidbody2D.MovePosition(to_move);
@@ -224,9 +226,8 @@ namespace Platformer.Mechanics
                 {
                     velocity.y = velocity.y * model.jumpDeceleration;
                 }
-            }else if(isDashing){
-                velocity.y=0;
             }
+            
 
             if (move.x > 0.01f)
                 spriteRenderer.flipX = false;
@@ -253,13 +254,15 @@ namespace Platformer.Mechanics
             float dashAmount = dashingPower * Mathf.Sign(_facingDirection);
             canDash = false;
             isDashing = true;
-            Debug.Log("Stop gravity");
+
+            gravityModifier = 0f;
             _rigidbody2D.velocity += new Vector2(dashAmount, 0);
             tr.emitting = true;
             yield return new WaitForSeconds(dashingTime);
             tr.emitting = false;
             _rigidbody2D.velocity -= new Vector2(dashAmount, 0);
-            Debug.Log("Start gravity");
+
+            gravityModifier = 1f;
             isDashing = false;
             yield return new WaitForSeconds(dashingCooldown);
             canDash = true;
