@@ -44,7 +44,10 @@ namespace Platformer.Mechanics
 
         public Bounds Bounds => collider2d.bounds;
 
-        private List<Vector3> _rewindList = new List<Vector3>();
+        //private List<Vector3> _rewindList = new List<Vector3>();
+
+        private RewindSaveInfo rewindSaveInfo;
+
         private Boolean _onRewind = false;
 
         [SerializeField] private PlayerOnRewind _staticPlayerOnRewind;
@@ -53,6 +56,9 @@ namespace Platformer.Mechanics
         private Rigidbody2D _rigidbody2D;
 
         private PlayerOnRewind staticPlayerOnRewind;
+
+        [SerializeField] private TimeManager _timeManager;
+
 
         private float _facingDirection = 1f;
         private bool canDash = true;
@@ -75,6 +81,7 @@ namespace Platformer.Mechanics
             _rigidbody2D = GetComponent<Rigidbody2D>();
             //_gravityModifier = GetComponent<gra
             _transform = this.transform;
+            rewindSaveInfo = GetComponent<RewindSaveInfo>();
         }
 
         protected override void Update()
@@ -110,10 +117,11 @@ namespace Platformer.Mechanics
                 new_pos.x = transform.position.x;
                 new_pos.y = transform.position.y;
                 _lastPositionBeforeRewind = new_pos;
+                //rewindSaveInfo.IncrementRewindingList();
                 // if (current_pos!=new_pos){
                 //     _rewindList.Add(new_pos);
                 // }
-                _rewindList.Add(new_pos);
+                //_rewindList.Add(new_pos);
 
 
                 //_rigidbody2D.MovePosition(new_pos);
@@ -140,9 +148,11 @@ namespace Platformer.Mechanics
 
         public void StartRewinding()
         {
+            Debug.Log("Start Rewinding");
             _onRewind = true;
             staticPlayerOnRewind = Instantiate(_staticPlayerOnRewind, _lastPositionBeforeRewind, _transform.rotation);
-            staticPlayerOnRewind.setRewindList(_rewindList);
+            staticPlayerOnRewind.setRewindSaveInfo(rewindSaveInfo);
+        
             staticPlayerOnRewind.setPlayerController(this);
             //controlEnabled = false;
 
@@ -154,6 +164,7 @@ namespace Platformer.Mechanics
             if (staticPlayerOnRewind != null)
             {
                 _transform.position = staticPlayerOnRewind.transform.position;
+                _timeManager.RewindAllAffectedObjects(staticPlayerOnRewind.getCurrentTimeRewind());
                 Destroy(staticPlayerOnRewind.gameObject);
             }
             //_rewindList = new List<Vector3>();
@@ -166,7 +177,7 @@ namespace Platformer.Mechanics
         {
 
 
-            int l = _rewindList.Count;
+           /* int l = _rewindList.Count;
             if (l > 0)
             {
                 Vector3 to_move = _rewindList[l - 1];
@@ -178,7 +189,7 @@ namespace Platformer.Mechanics
             else
             {
                 //_rigidbody2D.MovePosition(_transform.position);
-            }
+            }*/
 
         }
 
