@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
-    public Button otherButton;
-    public Door door;
+    
+    
     private bool isPressed = false;
-    private int nbcollision = 0;
-    [SerializeField] private float _buttonDelayOnRelease = 0.2f;
+    // private int nbcollision = 0;
+    [SerializeField] private float _buttonDelayOnRelease = 4f;
     
     // Start is called before the first frame update
     void Start()
@@ -22,18 +22,19 @@ public class Button : MonoBehaviour
     {
         isPressed = true;
         GetComponent<SpriteRenderer>().color = Color.red;
-        nbcollision++;
+        // nbcollision++;
     }
 
 
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        nbcollision--;
-        if (nbcollision == 0)
-        {
-            StartCoroutine("unPressButtonAfterDelay");
-        }
+        // nbcollision--;
+        // if (nbcollision == 0)
+    
+        StartCoroutine("unPressButtonAfterDelay");
+        
+
     }
 
     public bool getButtonState()
@@ -44,10 +45,7 @@ public class Button : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPressed && otherButton.getButtonState())
-        {
-            door.open();
-        }
+    
     }
 
     private void unPressButton()

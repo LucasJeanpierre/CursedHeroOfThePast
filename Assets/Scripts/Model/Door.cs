@@ -7,8 +7,13 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public GameObject door;
+    // public GameObject door;
     // Start is called before the first frame update
+    [SerializeField] List<Button> _buttonList= new List<Button>{};
+
+    private bool _toBeOpen=false;
+    
+
     void Start()
     {
 
@@ -16,13 +21,24 @@ public class Door : MonoBehaviour
 
     public void open()
     {
-        door.GetComponent<Renderer>().enabled = false;
-        door.GetComponent<Collider2D>().enabled = false;
+        this.GetComponent<Renderer>().enabled = false;
+        this.GetComponent<Collider2D>().enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        _toBeOpen=true;
+        foreach (Button b in _buttonList){
+            if (! b.getButtonState()){
+                _toBeOpen=false;
+            }
+        }
+        
+
+        if (_toBeOpen){
+            open();
+        }
 
     }
 }
