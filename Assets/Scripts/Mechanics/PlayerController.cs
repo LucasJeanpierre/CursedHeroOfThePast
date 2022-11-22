@@ -53,6 +53,8 @@ namespace Platformer.Mechanics
 
         private PlayerOnRewind staticPlayerOnRewind;
 
+        private PlayerOnRewind _cloneOfPlayerOnRewind;
+
 
         void Awake()
         {
@@ -134,7 +136,15 @@ namespace Platformer.Mechanics
             _onRewind = false;
             if (staticPlayerOnRewind != null)
             {
-                _transform.position = staticPlayerOnRewind.transform.position;
+                _cloneOfPlayerOnRewind =staticPlayerOnRewind.getStaticCloneOfThisClone();
+                if (Exists(_cloneOfPlayerOnRewind)){
+                    
+                    StartCoroutine("DoubleTP");
+
+                }
+                else{
+                    TP(staticPlayerOnRewind.transform.position);
+                }
                 Destroy(staticPlayerOnRewind.gameObject);
             }
             //_rewindList = new List<Vector3>();
@@ -162,6 +172,29 @@ namespace Platformer.Mechanics
                 //_rigidbody2D.MovePosition(_transform.position);
             }
 
+        }
+
+        private Boolean Exists(PlayerOnRewind cloneofclone){
+                if (cloneofclone==null){
+                 return false;
+                }
+                return true;
+            }
+  
+        private void TP(Vector3 position){
+            _transform.position=position;
+        }
+
+
+        IEnumerator DoubleTP(){
+
+            Vector3 FirstPosition= _cloneOfPlayerOnRewind.transform.position;
+            Vector3 SecondPosition= staticPlayerOnRewind.transform.position;
+            TP(FirstPosition);
+            
+            Destroy(_cloneOfPlayerOnRewind.gameObject);
+            yield return new WaitForSeconds(0.1f);
+            TP(SecondPosition);
         }
 
         void UpdateJumpState()
@@ -230,4 +263,7 @@ namespace Platformer.Mechanics
             Landed
         }
     }
+
+
+    
 }
