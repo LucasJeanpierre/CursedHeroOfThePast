@@ -19,6 +19,10 @@ namespace Platformer.Gameplay
         public GameObject StartVFX;
         public GameObject EndVFX;
 
+        // Shooting propriety
+        public float startAfter = 1.0f;
+        public float shootRate = 1.0f;
+
         // Rotating propriety
         public bool rotateLaser = false;
         public float rotateSpeed = 0.5f;
@@ -33,7 +37,7 @@ namespace Platformer.Gameplay
         {
             FillLists();
             DisableLaser();
-            InvokeRepeating("LaunchLaser", 1.0f, 1.0f);
+            InvokeRepeating("LaunchLaser", startAfter, shootRate);
         }
 
 
