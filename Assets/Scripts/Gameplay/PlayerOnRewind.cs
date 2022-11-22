@@ -25,7 +25,7 @@ public class PlayerOnRewind : MonoBehaviour
     {
         _transform = this.transform;
         _rigidbody2D = this.GetComponent<Rigidbody2D>();
-        //_rewindSaveInfo = GetComponent<RewindSaveInfo>();
+        _rewindSaveInfo = GetComponent<RewindSaveInfo>();
         currentTimeRewind = (float)System.Math.Round(Time.time, 2);
         currentTimeRewind -= currentTimeRewind % 0.02f;
         //Debug.Log(_rewindSaveInfo);
@@ -40,12 +40,14 @@ public class PlayerOnRewind : MonoBehaviour
     private void Rewind()
     {
         //Debug.Log("Current time on rewind: " + currentTimeRewind);
+        //_rewindSaveInfo.GetTimeRewindObject(currentTimeRewind);
         try
         {
             //Debug.Log(_rewindList[currentTimeRewind].GetTransform().position);
             //Debug.Log("found");
             //_transform.position = _rewindList[currentTimeRewind].GetTransform().position;
             //_rigidbody2D.MovePosition(_rewindList[(float) currentTimeRewind].GetPosition());
+            //_rewindSaveInfo.GetTimeRewindObject(currentTimeRewind);
             _rigidbody2D.MovePosition(GetTimeRewindObject(currentTimeRewind).GetPosition());
         }
         catch (System.Exception)

@@ -65,12 +65,29 @@ public class RewindSaveInfo : MonoBehaviour
 
     public void RewindTo(float time) {
         Debug.Log("Rewind to: " + time);
-        Debug.Log("Rotation: " + _timeRewindObjects[time].GetRotation());
+        Debug.Log("Rotation: " + this.GetTimeRewindObject(time).GetRotation());
 
-        _transform.position = _timeRewindObjects[time].GetPosition();
-        _transform.rotation = _timeRewindObjects[time].GetRotation();
-        _transform.localScale = _timeRewindObjects[time].GetScale();
+        _transform.position = this.GetTimeRewindObject(time).GetPosition();
+        _transform.rotation = this.GetTimeRewindObject(time).GetRotation();
+        _transform.localScale = this.GetTimeRewindObject(time).GetScale();
     }
+
+     private TimeRewindObject GetTimeRewindObject(float time)
+    {
+        //iterate through the list to find the time
+        foreach (KeyValuePair<float, TimeRewindObject> element in _timeRewindObjects)
+        {
+            float result = (float) element.Key - (float) time;
+            
+            if ((float) System.Math.Round(result, 2) == 0.00f)
+            {
+                return element.Value;
+            }
+        }
+        return null;
+    }
+
+
 
     /*
     return length of the _timeRewindObjects
