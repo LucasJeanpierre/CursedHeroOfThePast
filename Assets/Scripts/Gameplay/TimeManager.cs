@@ -31,11 +31,11 @@ public class TimeManager : MonoBehaviour
         #endif
     }
 
-    public void RewindAllAffectedObjects(float time)
+    public void RewindAllAffectedObjects(float rewind_time)
     {
         foreach (var rewindObject in _ListOfRewindObjects)
         {
-            rewindObject.GetComponent<RewindSaveInfo>().RewindTo(Time);
+            rewindObject.GetComponent<RewindSaveInfo>().RewindTo(rewind_time);
         }
     }
 

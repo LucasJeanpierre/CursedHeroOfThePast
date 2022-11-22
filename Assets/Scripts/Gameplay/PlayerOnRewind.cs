@@ -45,7 +45,8 @@ public class PlayerOnRewind : MonoBehaviour
             //Debug.Log(_rewindList[currentTimeRewind].GetTransform().position);
             //Debug.Log("found");
             //_transform.position = _rewindList[currentTimeRewind].GetTransform().position;
-            _rigidbody2D.MovePosition(_rewindList[(float) currentTimeRewind].GetPosition());
+            //_rigidbody2D.MovePosition(_rewindList[(float) currentTimeRewind].GetPosition());
+            _rigidbody2D.MovePosition(GetTimeRewindObject(currentTimeRewind).GetPosition());
         }
         catch (System.Exception)
         {
@@ -69,7 +70,7 @@ public class PlayerOnRewind : MonoBehaviour
 
 
         currentTimeRewind -= Time.fixedDeltaTime;
-        currentTimeRewind = (float)System.Math.Round(currentTimeRewind, 2);
+        currentTimeRewind = (float) System.Math.Round(currentTimeRewind, 2);
         currentTimeRewind -= currentTimeRewind % 0.02f;
 
         /* int l = _rewindList.Count;
@@ -100,11 +101,27 @@ public class PlayerOnRewind : MonoBehaviour
         foreach (KeyValuePair<float,TimeRewindObject> element in rewindSaveInfo.GetRewindList())
         {
             _rewindList.Add((float) element.Key, element.Value);
-            Debug.Log("Added: " + element.Key + " | " + element.Value.GetPosition());
+            //Debug.Log("Added: " + element.Key + " | " + element.Value.GetPosition());
         }
 
         //_rewindSaveInfo = rewindSaveInfo;
         //Debug.Log("set rewind save info");
+    }
+
+
+    private TimeRewindObject GetTimeRewindObject(float time)
+    {
+        //iterate through the list to find the time
+        foreach (KeyValuePair<float, TimeRewindObject> element in _rewindList)
+        {
+            float result = (float) element.Key - (float) time;
+            
+            if ((float) System.Math.Round(result, 2) == 0.00f)
+            {
+                return element.Value;
+            }
+        }
+        return null;
     }
     public void setPlayerController(PlayerController playerController)
     {

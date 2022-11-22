@@ -33,8 +33,8 @@ public class RewindSaveInfo : MonoBehaviour
     public TimeRewindObject CreateTimeRewindObject()
     {
         return new TimeRewindObject(
-            new Vector3(_transform.position.x, _transform.position.y, _transform.position.z),
-            new Quaternion(_transform.rotation.x, _transform.rotation.y, _transform.rotation.z, _transform.rotation.w),
+            new Vector3(_transform.position.x, _transform.position.y, _transform.position.z),   
+            new Vector3(_transform.eulerAngles.x, _transform.eulerAngles.y, _transform.eulerAngles.z),
             new Vector3(_transform.localScale.x, _transform.localScale.y, _transform.localScale.z),
             true);
     }
@@ -64,6 +64,9 @@ public class RewindSaveInfo : MonoBehaviour
 
 
     public void RewindTo(float time) {
+        Debug.Log("Rewind to: " + time);
+        Debug.Log("Rotation: " + _timeRewindObjects[time].GetRotation());
+
         _transform.position = _timeRewindObjects[time].GetPosition();
         _transform.rotation = _timeRewindObjects[time].GetRotation();
         _transform.localScale = _timeRewindObjects[time].GetScale();
@@ -71,7 +74,7 @@ public class RewindSaveInfo : MonoBehaviour
 
     /*
     return length of the _timeRewindObjects
-     */
+    */
     public int GetLength()
     {
         return _timeRewindObjects.Count;

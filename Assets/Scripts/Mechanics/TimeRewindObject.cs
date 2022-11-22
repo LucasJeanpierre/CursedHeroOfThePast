@@ -6,12 +6,12 @@ public class TimeRewindObject
 {
 
     private Vector3 _position;
-    private Quaternion _rotation;
+    private Vector3 _rotation;
     private Vector3 _scale;
 
     private bool _available;
 
-    public TimeRewindObject(Vector3 position, Quaternion rotation, Vector3 scale, bool available)
+    public TimeRewindObject(Vector3 position, Vector3 rotation, Vector3 scale, bool available)
     {
         _position = position;
         _rotation = rotation;
@@ -36,7 +36,7 @@ public class TimeRewindObject
 
     public Quaternion GetRotation()
     {
-        return _rotation;
+        return Quaternion.Euler(_rotation);
     }
 
     public Vector3 GetScale()
