@@ -35,6 +35,7 @@ namespace Platformer.Mechanics
         public Health health;
         public bool controlEnabled = true;
 
+
         bool jump;
         Vector2 move;
         SpriteRenderer spriteRenderer;
@@ -59,6 +60,17 @@ namespace Platformer.Mechanics
         [SerializeField] private TimeManager _timeManager;
 
 
+        private float _facingDirection = 1f;
+        private bool canDash = true;
+        private bool isDashing;
+        public float dashingPower = 2f;
+        private float dashingTime = 0.2f;
+        private float dashingCooldown = 1f;
+
+        [SerializeField] private TrailRenderer tr;
+        
+        //private GravityModifier _gravityModifier;
+
         void Awake()
         {
             health = GetComponent<Health>();
@@ -67,12 +79,24 @@ namespace Platformer.Mechanics
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
             _rigidbody2D = GetComponent<Rigidbody2D>();
+            //_gravityModifier = GetComponent<gra
             _transform = this.transform;
             rewindSaveInfo = GetComponent<RewindSaveInfo>();
         }
 
         protected override void Update()
-        {
+        {   
+            _facingDirection = Input.GetAxis("Horizontal")!=0 ? Input.GetAxis("Horizontal") : _facingDirection;
+
+            if(isDashing)
+            {
+                return; 
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+            {
+                StartCoroutine("Dash");
+            }
 
             if (Input.GetKeyDown(KeyCode.Backspace) && (_onRewind == true))
             {
@@ -81,7 +105,6 @@ namespace Platformer.Mechanics
             {
                 StartRewinding();
             }
-
 
             if (_onRewind)
             {
@@ -157,7 +180,6 @@ namespace Platformer.Mechanics
            /* int l = _rewindList.Count;
             if (l > 0)
             {
-                // Debug.Log(l);
                 Vector3 to_move = _rewindList[l - 1];
                 _rewindList.RemoveAt(l - 1);
                 //_rigidbody2D.MovePosition(to_move);
@@ -203,6 +225,11 @@ namespace Platformer.Mechanics
 
         protected override void ComputeVelocity()
         {
+            if(isDashing)
+            {
+                velocity.y = 0;
+                return; 
+            }
             if (jump && IsGrounded)
             {
                 velocity.y = jumpTakeOffSpeed * model.jumpModifier;
@@ -216,6 +243,7 @@ namespace Platformer.Mechanics
                     velocity.y = velocity.y * model.jumpDeceleration;
                 }
             }
+            
 
             if (move.x > 0.01f)
                 spriteRenderer.flipX = false;
@@ -235,6 +263,26 @@ namespace Platformer.Mechanics
             Jumping,
             InFlight,
             Landed
+        }
+
+
+        private IEnumerator Dash(){
+            float dashAmount = dashingPower * Mathf.Sign(_facingDirection);
+            canDash = false;
+            isDashing = true;
+
+            gravityModifier = 0f;
+            _rigidbody2D.velocity += new Vector2(dashAmount, 0);
+            tr.emitting = true;
+            yield return new WaitForSeconds(dashingTime);
+            tr.emitting = false;
+            _rigidbody2D.velocity -= new Vector2(dashAmount, 0);
+
+            gravityModifier = 1f;
+            isDashing = false;
+            yield return new WaitForSeconds(dashingCooldown);
+            canDash = true;
+
         }
     }
 }
