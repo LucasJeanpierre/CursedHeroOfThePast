@@ -30,8 +30,10 @@ namespace Platformer.Mechanics
 
         public JumpState jumpState = JumpState.Grounded;
         private bool stopJump;
-        /*internal new*/ public Collider2D collider2d;
-        /*internal new*/ public AudioSource audioSource;
+        /*internal new*/
+        public Collider2D collider2d;
+        /*internal new*/
+        public AudioSource audioSource;
         public Health health;
         public bool controlEnabled = true;
 
@@ -50,12 +52,12 @@ namespace Platformer.Mechanics
 
         private Boolean _onRewind = false;
 
-        [SerializeField] private PlayerOnRewind _staticPlayerOnRewind;
+        [SerializeField] private PlayerOnRewind __playerOnRewind;
         private Vector3 _lastPositionBeforeRewind;
         private Transform _transform;
         private Rigidbody2D _rigidbody2D;
 
-        private PlayerOnRewind staticPlayerOnRewind;
+        private PlayerOnRewind _playerOnRewind;
 
         [SerializeField] private TimeManager _timeManager;
 
@@ -68,7 +70,7 @@ namespace Platformer.Mechanics
         private float dashingCooldown = 1f;
 
         [SerializeField] private TrailRenderer tr;
-        
+
         //private GravityModifier _gravityModifier;
 
         void Awake()
@@ -85,12 +87,12 @@ namespace Platformer.Mechanics
         }
 
         protected override void Update()
-        {   
-            _facingDirection = Input.GetAxis("Horizontal")!=0 ? Input.GetAxis("Horizontal") : _facingDirection;
+        {
+            _facingDirection = Input.GetAxis("Horizontal") != 0 ? Input.GetAxis("Horizontal") : _facingDirection;
 
-            if(isDashing)
+            if (isDashing)
             {
-                return; 
+                return;
             }
 
             if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
@@ -101,7 +103,8 @@ namespace Platformer.Mechanics
             if (Input.GetKeyDown(KeyCode.Backspace) && (_onRewind == true))
             {
                 StopRewinding();
-            } else if (Input.GetKeyDown(KeyCode.Backspace) && (_onRewind == false))
+            }
+            else if (Input.GetKeyDown(KeyCode.Backspace) && (_onRewind == false))
             {
                 StartRewinding();
             }
@@ -148,12 +151,13 @@ namespace Platformer.Mechanics
 
         public void StartRewinding()
         {
-            Debug.Log("Start Rewinding");
+            _timeManager.setOnRewind(true);
             _onRewind = true;
-            staticPlayerOnRewind = Instantiate(_staticPlayerOnRewind, _lastPositionBeforeRewind, _transform.rotation);
-            staticPlayerOnRewind.setRewindSaveInfo(rewindSaveInfo);
-        
-            staticPlayerOnRewind.setPlayerController(this);
+            _playerOnRewind = Instantiate(__playerOnRewind, _transform.position, _transform.rotation);
+            _playerOnRewind.setRewindSaveInfo(rewindSaveInfo);
+            _playerOnRewind.setTimeManager(_timeManager);
+            //_playerOnRewind.SetCurrentRewindTime(_timeManager.GetCustomTime());
+            _playerOnRewind.setPlayerController(this);
             //controlEnabled = false;
 
         }
@@ -161,35 +165,36 @@ namespace Platformer.Mechanics
         public void StopRewinding()
         {
             _onRewind = false;
-            if (staticPlayerOnRewind != null)
+            _timeManager.setOnRewind(false);
+            if (_playerOnRewind != null)
             {
-                _transform.position = staticPlayerOnRewind.transform.position;
-                _timeManager.RewindAllAffectedObjects(staticPlayerOnRewind.getCurrentTimeRewind());
-                Destroy(staticPlayerOnRewind.gameObject);
+                _transform.position = _playerOnRewind.transform.position;
+                _timeManager.RewindAllAffectedObjects();
+                Destroy(_playerOnRewind.gameObject);
             }
             //_rewindList = new List<Vector3>();
-            //staticPlayerOnRewind.setOnRewind(false);
+            //_playerOnRewind.setOnRewind(false);
             //controlEnabled = true;
-            //staticPlayerOnRewind.Destroy();
+            //_playerOnRewind.Destroy();
         }
 
         private void Rewind()
         {
 
 
-           /* int l = _rewindList.Count;
-            if (l > 0)
-            {
-                Vector3 to_move = _rewindList[l - 1];
-                _rewindList.RemoveAt(l - 1);
-                //_rigidbody2D.MovePosition(to_move);
-                _transform.position = to_move;
+            /* int l = _rewindList.Count;
+             if (l > 0)
+             {
+                 Vector3 to_move = _rewindList[l - 1];
+                 _rewindList.RemoveAt(l - 1);
+                 //_rigidbody2D.MovePosition(to_move);
+                 _transform.position = to_move;
 
-            }
-            else
-            {
-                //_rigidbody2D.MovePosition(_transform.position);
-            }*/
+             }
+             else
+             {
+                 //_rigidbody2D.MovePosition(_transform.position);
+             }*/
 
         }
 
@@ -225,10 +230,10 @@ namespace Platformer.Mechanics
 
         protected override void ComputeVelocity()
         {
-            if(isDashing)
+            if (isDashing)
             {
                 velocity.y = 0;
-                return; 
+                return;
             }
             if (jump && IsGrounded)
             {
@@ -243,7 +248,7 @@ namespace Platformer.Mechanics
                     velocity.y = velocity.y * model.jumpDeceleration;
                 }
             }
-            
+
 
             if (move.x > 0.01f)
                 spriteRenderer.flipX = false;
@@ -266,7 +271,8 @@ namespace Platformer.Mechanics
         }
 
 
-        private IEnumerator Dash(){
+        private IEnumerator Dash()
+        {
             float dashAmount = dashingPower * Mathf.Sign(_facingDirection);
             canDash = false;
             isDashing = true;
