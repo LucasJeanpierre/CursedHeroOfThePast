@@ -80,6 +80,9 @@ namespace Platformer.Mechanics
 
 
         [SerializeField] private CinemachineTargetGroup _cinemachineTargetGroup;
+
+
+        [SerializeField] private float delayBetweenClones = 0.02f;
         
         //private GravityModifier _gravityModifier;
 
@@ -169,7 +172,7 @@ namespace Platformer.Mechanics
             //_playerOnRewind.SetCurrentRewindTime(_timeManager.GetCustomTime());
             _playerOnRewind.setPlayerController(this);
 
-            _cinemachineTargetGroup.AddMember(__playerOnRewind.transform, 1f, 0f);
+            _cinemachineTargetGroup.AddMember(_playerOnRewind.transform, 1f, 0f);
             //controlEnabled = false;
 
         }
@@ -177,9 +180,9 @@ namespace Platformer.Mechanics
         public void CreateClone()
         {
             PlayerOnRewind clone = Instantiate(__playerOnRewind, _playerOnRewind.transform.position, _playerOnRewind.transform.rotation);
-            clone.setRewindSaveInfo(rewindSaveInfo);
-            clone.setTimeManager(_timeManager);
-            clone.setPlayerController(this);
+            //clone.setRewindSaveInfo(rewindSaveInfo);
+            //clone.setTimeManager(_timeManager);
+            //clone.setPlayerController(this);
             clone.setIsStatic(true);
 
             _clones.Add(clone);
@@ -187,8 +190,6 @@ namespace Platformer.Mechanics
 
         public void StopRewinding()
         {
-            _onRewind = false;
-            _timeManager.setOnRewind(false);
             // if (staticPlayerOnRewind != null)
             // {
             //     _transform.position = staticPlayerOnRewind.transform.position;
@@ -201,8 +202,10 @@ namespace Platformer.Mechanics
             //controlEnabled = true;
             //staticPlayerOnRewind.Destroy();
 
+            
+
             //go trough the list of clones and destroy them
-            coroutine = TeleportToAllClonesPositions(0.05f);
+            coroutine = TeleportToAllClonesPositions(delayBetweenClones);
             StartCoroutine(coroutine);
 
         }
@@ -311,12 +314,20 @@ namespace Platformer.Mechanics
                 yield return new WaitForSeconds(delay);
             }
 
+            _clones = new List<PlayerOnRewind>();
+
              if (_playerOnRewind != null)
             {
                 _transform.position = _playerOnRewind.transform.position;
                 _timeManager.RewindAllAffectedObjects();
+                _cinemachineTargetGroup.RemoveMember(_playerOnRewind.transform);
                 Destroy(_playerOnRewind.gameObject);
             }
+
+
+            _onRewind = false;
+            _timeManager.setOnRewind(false);
+
         }
     }
 }
