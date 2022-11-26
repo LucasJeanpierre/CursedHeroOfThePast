@@ -6,6 +6,7 @@ using static Platformer.Core.Simulation;
 using Platformer.Model;
 using Platformer.Core;
 using System;
+using Cinemachine;
 
 namespace Platformer.Mechanics
 {
@@ -77,6 +78,9 @@ namespace Platformer.Mechanics
 
         [SerializeField] private TrailRenderer tr;
 
+
+        [SerializeField] private CinemachineTargetGroup _cinemachineTargetGroup;
+        
         //private GravityModifier _gravityModifier;
 
         void Awake()
@@ -164,6 +168,8 @@ namespace Platformer.Mechanics
             _playerOnRewind.setTimeManager(_timeManager);
             //_playerOnRewind.SetCurrentRewindTime(_timeManager.GetCustomTime());
             _playerOnRewind.setPlayerController(this);
+
+            _cinemachineTargetGroup.AddMember(__playerOnRewind.transform, 1f, 0f);
             //controlEnabled = false;
 
         }
@@ -183,6 +189,17 @@ namespace Platformer.Mechanics
         {
             _onRewind = false;
             _timeManager.setOnRewind(false);
+            // if (staticPlayerOnRewind != null)
+            // {
+            //     _transform.position = staticPlayerOnRewind.transform.position;
+            //     _timeManager.RewindAllAffectedObjects(staticPlayerOnRewind.getCurrentTimeRewind());
+            //     _cinemachineTargetGroup.RemoveMember(staticPlayerOnRewind.transform);
+            //     Destroy(staticPlayerOnRewind.gameObject);
+            // }
+            //_rewindList = new List<Vector3>();
+            //staticPlayerOnRewind.setOnRewind(false);
+            //controlEnabled = true;
+            //staticPlayerOnRewind.Destroy();
 
             //go trough the list of clones and destroy them
             coroutine = TeleportToAllClonesPositions(0.05f);
@@ -270,11 +287,12 @@ namespace Platformer.Mechanics
             isDashing = true;
 
             gravityModifier = 0f;
-            _rigidbody2D.velocity += new Vector2(dashAmount, 0);
+            //_rigidbody2D.velocity += new Vector2(dashAmount, 0);
+            PerformMovement(new Vector2(dashAmount, 0), false);
             tr.emitting = true;
             yield return new WaitForSeconds(dashingTime);
             tr.emitting = false;
-            _rigidbody2D.velocity -= new Vector2(dashAmount, 0);
+            //_rigidbody2D.velocity -= new Vector2(dashAmount, 0);
 
             gravityModifier = 1f;
             isDashing = false;
