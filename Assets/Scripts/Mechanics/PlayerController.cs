@@ -272,11 +272,12 @@ namespace Platformer.Mechanics
             isDashing = true;
 
             gravityModifier = 0f;
-            _rigidbody2D.velocity += new Vector2(dashAmount, 0);
+            //_rigidbody2D.velocity += new Vector2(dashAmount, 0);
+            PerformMovement(new Vector2(dashAmount, 0), false);
             tr.emitting = true;
             yield return new WaitForSeconds(dashingTime);
             tr.emitting = false;
-            _rigidbody2D.velocity -= new Vector2(dashAmount, 0);
+            //_rigidbody2D.velocity -= new Vector2(dashAmount, 0);
 
             gravityModifier = 1f;
             isDashing = false;
