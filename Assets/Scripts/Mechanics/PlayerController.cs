@@ -6,6 +6,7 @@ using static Platformer.Core.Simulation;
 using Platformer.Model;
 using Platformer.Core;
 using System;
+using Cinemachine;
 
 namespace Platformer.Mechanics
 {
@@ -68,6 +69,9 @@ namespace Platformer.Mechanics
         private float dashingCooldown = 1f;
 
         [SerializeField] private TrailRenderer tr;
+
+
+        [SerializeField] private CinemachineTargetGroup _cinemachineTargetGroup;
         
         //private GravityModifier _gravityModifier;
 
@@ -154,6 +158,9 @@ namespace Platformer.Mechanics
             staticPlayerOnRewind.setRewindSaveInfo(rewindSaveInfo);
         
             staticPlayerOnRewind.setPlayerController(this);
+
+            _cinemachineTargetGroup.AddMember(staticPlayerOnRewind.transform, 1f, 0f);
+
             //controlEnabled = false;
 
         }
@@ -165,6 +172,7 @@ namespace Platformer.Mechanics
             {
                 _transform.position = staticPlayerOnRewind.transform.position;
                 _timeManager.RewindAllAffectedObjects(staticPlayerOnRewind.getCurrentTimeRewind());
+                _cinemachineTargetGroup.RemoveMember(staticPlayerOnRewind.transform);
                 Destroy(staticPlayerOnRewind.gameObject);
             }
             //_rewindList = new List<Vector3>();
