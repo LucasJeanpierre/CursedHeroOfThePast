@@ -22,6 +22,10 @@ public class PlayerOnRewind : MonoBehaviour
     private float result;
 
     private float currentTimeRewind;
+
+    private bool _isStatic;
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +40,9 @@ public class PlayerOnRewind : MonoBehaviour
     // Update is called once per frame
     public void FixedUpdate()
     {
-        Rewind();
+        if (!_isStatic) {
+            Rewind();
+        }
     }
 
     private void Rewind()
@@ -61,22 +67,6 @@ public class PlayerOnRewind : MonoBehaviour
             _playerController.StopRewinding();
         }
 
-        /* int l = _rewindList.Count;
-         if (l > 0)
-         {
-             // Debug.Log(l);
-             Vector3 to_move = _rewindList[l - 1];
-             _rewindList.RemoveAt(l - 1);
-             //_rigidbody2D.MovePosition(to_move);
-             _transform.position = to_move;
-
-         }
-         else
-         {
-             //_rigidbody2D.MovePosition(_transform.position);
-             Destroy(gameObject);
-             _playerController.StopRewinding();
-         }*/
 
     }
 
@@ -130,6 +120,11 @@ public class PlayerOnRewind : MonoBehaviour
     public float getCurrentTimeRewind()
     {
         return currentTimeRewind;
+    }
+
+    public void setIsStatic(bool isStatic)
+    {
+        _isStatic = isStatic;
     }
 
 

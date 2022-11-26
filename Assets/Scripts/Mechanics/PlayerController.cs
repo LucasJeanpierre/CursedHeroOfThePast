@@ -69,6 +69,12 @@ namespace Platformer.Mechanics
         private float dashingTime = 0.2f;
         private float dashingCooldown = 1f;
 
+
+        private IEnumerator coroutine;
+
+        //list of clones
+        private List<PlayerOnRewind> _clones = new List<PlayerOnRewind>();
+
         [SerializeField] private TrailRenderer tr;
 
         //private GravityModifier _gravityModifier;
@@ -107,12 +113,12 @@ namespace Platformer.Mechanics
             else if (Input.GetKeyDown(KeyCode.Backspace) && (_onRewind == false))
             {
                 StartRewinding();
+            } 
+            else if (Input.GetKeyDown(KeyCode.LeftControl) && (_onRewind == true))
+            {
+                CreateClone();
             }
 
-            if (_onRewind)
-            {
-                //Rewind();
-            }
             else
             {
                 Vector2 current_pos = new Vector2(_transform.position.x, _transform.position.y);
@@ -162,39 +168,25 @@ namespace Platformer.Mechanics
 
         }
 
+        public void CreateClone()
+        {
+            PlayerOnRewind clone = Instantiate(__playerOnRewind, _playerOnRewind.transform.position, _playerOnRewind.transform.rotation);
+            clone.setRewindSaveInfo(rewindSaveInfo);
+            clone.setTimeManager(_timeManager);
+            clone.setPlayerController(this);
+            clone.setIsStatic(true);
+
+            _clones.Add(clone);
+        }
+
         public void StopRewinding()
         {
             _onRewind = false;
             _timeManager.setOnRewind(false);
-            if (_playerOnRewind != null)
-            {
-                _transform.position = _playerOnRewind.transform.position;
-                _timeManager.RewindAllAffectedObjects();
-                Destroy(_playerOnRewind.gameObject);
-            }
-            //_rewindList = new List<Vector3>();
-            //_playerOnRewind.setOnRewind(false);
-            //controlEnabled = true;
-            //_playerOnRewind.Destroy();
-        }
 
-        private void Rewind()
-        {
-
-
-            /* int l = _rewindList.Count;
-             if (l > 0)
-             {
-                 Vector3 to_move = _rewindList[l - 1];
-                 _rewindList.RemoveAt(l - 1);
-                 //_rigidbody2D.MovePosition(to_move);
-                 _transform.position = to_move;
-
-             }
-             else
-             {
-                 //_rigidbody2D.MovePosition(_transform.position);
-             }*/
+            //go trough the list of clones and destroy them
+            coroutine = TeleportToAllClonesPositions(0.05f);
+            StartCoroutine(coroutine);
 
         }
 
@@ -289,6 +281,24 @@ namespace Platformer.Mechanics
             yield return new WaitForSeconds(dashingCooldown);
             canDash = true;
 
+        }
+
+
+        IEnumerator TeleportToAllClonesPositions(float delay)
+        {
+            foreach (PlayerOnRewind clone in _clones)
+            {
+                _transform.position = clone.transform.position;
+                Destroy(clone.gameObject);
+                yield return new WaitForSeconds(delay);
+            }
+
+             if (_playerOnRewind != null)
+            {
+                _transform.position = _playerOnRewind.transform.position;
+                _timeManager.RewindAllAffectedObjects();
+                Destroy(_playerOnRewind.gameObject);
+            }
         }
     }
 }
