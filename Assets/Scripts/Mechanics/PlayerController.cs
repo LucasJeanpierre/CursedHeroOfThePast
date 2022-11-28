@@ -6,6 +6,7 @@ using static Platformer.Core.Simulation;
 using Platformer.Model;
 using Platformer.Core;
 using System;
+using Cinemachine;
 
 namespace Platformer.Mechanics
 {
@@ -30,8 +31,10 @@ namespace Platformer.Mechanics
 
         public JumpState jumpState = JumpState.Grounded;
         private bool stopJump;
-        /*internal new*/ public Collider2D collider2d;
-        /*internal new*/ public AudioSource audioSource;
+        /*internal new*/
+        public Collider2D collider2d;
+        /*internal new*/
+        public AudioSource audioSource;
         public Health health;
         public bool controlEnabled = true;
 
@@ -50,12 +53,12 @@ namespace Platformer.Mechanics
 
         private Boolean _onRewind = false;
 
-        [SerializeField] private PlayerOnRewind _staticPlayerOnRewind;
+        [SerializeField] private PlayerOnRewind __playerOnRewind;
         private Vector3 _lastPositionBeforeRewind;
         private Transform _transform;
         private Rigidbody2D _rigidbody2D;
 
-        private PlayerOnRewind staticPlayerOnRewind;
+        private PlayerOnRewind _playerOnRewind;
 
         [SerializeField] private TimeManager _timeManager;
 
@@ -67,7 +70,19 @@ namespace Platformer.Mechanics
         private float dashingTime = 0.2f;
         private float dashingCooldown = 1f;
 
+
+        private IEnumerator coroutine;
+
+        //list of clones
+        private List<PlayerOnRewind> _clones = new List<PlayerOnRewind>();
+
         [SerializeField] private TrailRenderer tr;
+
+
+        [SerializeField] private CinemachineTargetGroup _cinemachineTargetGroup;
+
+
+        [SerializeField] private float delayBetweenClones = 0.02f;
         
         //private GravityModifier _gravityModifier;
 
@@ -85,12 +100,12 @@ namespace Platformer.Mechanics
         }
 
         protected override void Update()
-        {   
-            _facingDirection = Input.GetAxis("Horizontal")!=0 ? Input.GetAxis("Horizontal") : _facingDirection;
+        {
+            _facingDirection = Input.GetAxis("Horizontal") != 0 ? Input.GetAxis("Horizontal") : _facingDirection;
 
-            if(isDashing)
+            if (isDashing)
             {
-                return; 
+                return;
             }
 
             if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
@@ -101,15 +116,16 @@ namespace Platformer.Mechanics
             if (Input.GetKeyDown(KeyCode.Backspace) && (_onRewind == true))
             {
                 StopRewinding();
-            } else if (Input.GetKeyDown(KeyCode.Backspace) && (_onRewind == false))
+            }
+            else if (Input.GetKeyDown(KeyCode.Backspace) && (_onRewind == false))
             {
                 StartRewinding();
+            } 
+            else if (Input.GetKeyDown(KeyCode.LeftControl) && (_onRewind == true))
+            {
+                CreateClone();
             }
 
-            if (_onRewind)
-            {
-                //Rewind();
-            }
             else
             {
                 Vector2 current_pos = new Vector2(_transform.position.x, _transform.position.y);
@@ -148,48 +164,49 @@ namespace Platformer.Mechanics
 
         public void StartRewinding()
         {
-            Debug.Log("Start Rewinding");
+            _timeManager.setOnRewind(true);
             _onRewind = true;
-            staticPlayerOnRewind = Instantiate(_staticPlayerOnRewind, _lastPositionBeforeRewind, _transform.rotation);
-            staticPlayerOnRewind.setRewindSaveInfo(rewindSaveInfo);
-        
-            staticPlayerOnRewind.setPlayerController(this);
+            _playerOnRewind = Instantiate(__playerOnRewind, _transform.position, _transform.rotation);
+            _playerOnRewind.setRewindSaveInfo(rewindSaveInfo);
+            _playerOnRewind.setTimeManager(_timeManager);
+            //_playerOnRewind.SetCurrentRewindTime(_timeManager.GetCustomTime());
+            _playerOnRewind.setPlayerController(this);
+
+            _cinemachineTargetGroup.AddMember(_playerOnRewind.transform, 1f, 0f);
             //controlEnabled = false;
 
         }
 
+        public void CreateClone()
+        {
+            PlayerOnRewind clone = Instantiate(__playerOnRewind, _playerOnRewind.transform.position, _playerOnRewind.transform.rotation);
+            //clone.setRewindSaveInfo(rewindSaveInfo);
+            //clone.setTimeManager(_timeManager);
+            //clone.setPlayerController(this);
+            clone.setIsStatic(true);
+
+            _clones.Add(clone);
+        }
+
         public void StopRewinding()
         {
-            _onRewind = false;
-            if (staticPlayerOnRewind != null)
-            {
-                _transform.position = staticPlayerOnRewind.transform.position;
-                _timeManager.RewindAllAffectedObjects(staticPlayerOnRewind.getCurrentTimeRewind());
-                Destroy(staticPlayerOnRewind.gameObject);
-            }
+            // if (staticPlayerOnRewind != null)
+            // {
+            //     _transform.position = staticPlayerOnRewind.transform.position;
+            //     _timeManager.RewindAllAffectedObjects(staticPlayerOnRewind.getCurrentTimeRewind());
+            //     _cinemachineTargetGroup.RemoveMember(staticPlayerOnRewind.transform);
+            //     Destroy(staticPlayerOnRewind.gameObject);
+            // }
             //_rewindList = new List<Vector3>();
             //staticPlayerOnRewind.setOnRewind(false);
             //controlEnabled = true;
             //staticPlayerOnRewind.Destroy();
-        }
 
-        private void Rewind()
-        {
+            
 
-
-           /* int l = _rewindList.Count;
-            if (l > 0)
-            {
-                Vector3 to_move = _rewindList[l - 1];
-                _rewindList.RemoveAt(l - 1);
-                //_rigidbody2D.MovePosition(to_move);
-                _transform.position = to_move;
-
-            }
-            else
-            {
-                //_rigidbody2D.MovePosition(_transform.position);
-            }*/
+            //go trough the list of clones and destroy them
+            coroutine = TeleportToAllClonesPositions(delayBetweenClones);
+            StartCoroutine(coroutine);
 
         }
 
@@ -225,10 +242,10 @@ namespace Platformer.Mechanics
 
         protected override void ComputeVelocity()
         {
-            if(isDashing)
+            if (isDashing)
             {
                 velocity.y = 0;
-                return; 
+                return;
             }
             if (jump && IsGrounded)
             {
@@ -243,7 +260,7 @@ namespace Platformer.Mechanics
                     velocity.y = velocity.y * model.jumpDeceleration;
                 }
             }
-            
+
 
             if (move.x > 0.01f)
                 spriteRenderer.flipX = false;
@@ -266,22 +283,50 @@ namespace Platformer.Mechanics
         }
 
 
-        private IEnumerator Dash(){
+        private IEnumerator Dash()
+        {
             float dashAmount = dashingPower * Mathf.Sign(_facingDirection);
             canDash = false;
             isDashing = true;
 
             gravityModifier = 0f;
-            _rigidbody2D.velocity += new Vector2(dashAmount, 0);
+            //_rigidbody2D.velocity += new Vector2(dashAmount, 0);
+            PerformMovement(new Vector2(dashAmount, 0), false);
             tr.emitting = true;
             yield return new WaitForSeconds(dashingTime);
             tr.emitting = false;
-            _rigidbody2D.velocity -= new Vector2(dashAmount, 0);
+            //_rigidbody2D.velocity -= new Vector2(dashAmount, 0);
 
             gravityModifier = 1f;
             isDashing = false;
             yield return new WaitForSeconds(dashingCooldown);
             canDash = true;
+
+        }
+
+
+        IEnumerator TeleportToAllClonesPositions(float delay)
+        {
+            foreach (PlayerOnRewind clone in _clones)
+            {
+                _transform.position = clone.transform.position;
+                Destroy(clone.gameObject);
+                yield return new WaitForSeconds(delay);
+            }
+
+            _clones = new List<PlayerOnRewind>();
+
+             if (_playerOnRewind != null)
+            {
+                _transform.position = _playerOnRewind.transform.position;
+                _timeManager.RewindAllAffectedObjects();
+                _cinemachineTargetGroup.RemoveMember(_playerOnRewind.transform);
+                Destroy(_playerOnRewind.gameObject);
+            }
+
+
+            _onRewind = false;
+            _timeManager.setOnRewind(false);
 
         }
     }

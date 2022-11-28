@@ -7,6 +7,8 @@ public class RewindSaveInfo : MonoBehaviour
 {
 
     private Dictionary<float, TimeRewindObject> _timeRewindObjects;
+
+    [SerializeField] public TimeManager _timeManager;
     private Transform _transform;
 
     private Transform _tmpTransform;
@@ -20,13 +22,15 @@ public class RewindSaveInfo : MonoBehaviour
     private void FixedUpdate()
     {
         _transform = GetComponent<Transform>();
-        IncrementRewindingList();
+        if (!_timeManager.getOnRewind()) {
+            IncrementRewindingList();
+        }   
     }
 
 
     public void IncrementRewindingList()
     {
-      AddTimeRewindObject(CreateTimeRewindObject(), (float) System.Math.Round(Time.time,2));
+      AddTimeRewindObject(CreateTimeRewindObject(), _timeManager.GetCustomTime());
         
     }
 
@@ -41,7 +45,15 @@ public class RewindSaveInfo : MonoBehaviour
 
     public void AddTimeRewindObject(TimeRewindObject timeRewindObject, float time)
     {
-        _timeRewindObjects.Add(time, timeRewindObject);
+        try
+        {
+            _timeRewindObjects.Add(time, timeRewindObject);
+        }
+        catch (System.Exception)
+        {
+            _timeRewindObjects[time] = timeRewindObject;
+        }
+        
         //Debug.Log("Current time: " + time + " | " + "Current rotation: " + _timeRewindObjects[time].GetTransform().rotation);
     }
 

@@ -17,16 +17,22 @@ public class PlayerOnRewind : MonoBehaviour
 
     private Rigidbody2D _rigidbody2D;
 
+    private TimeManager _timeManager;
+
     private float result;
 
     private float currentTimeRewind;
+
+    private bool _isStatic;
+    
+
     // Start is called before the first frame update
     void Start()
     {
         _transform = this.transform;
         _rigidbody2D = this.GetComponent<Rigidbody2D>();
         _rewindSaveInfo = GetComponent<RewindSaveInfo>();
-        currentTimeRewind = (float)System.Math.Round(Time.time, 2);
+        //currentTimeRewind = (float)System.Math.Round(Time.time, 2);
         currentTimeRewind -= currentTimeRewind % 0.02f;
         //Debug.Log(_rewindSaveInfo);
     }
@@ -34,7 +40,9 @@ public class PlayerOnRewind : MonoBehaviour
     // Update is called once per frame
     public void FixedUpdate()
     {
-        Rewind();
+        if (!_isStatic) {
+            Rewind();
+        }
     }
 
     private void Rewind()
@@ -43,31 +51,11 @@ public class PlayerOnRewind : MonoBehaviour
         //_rewindSaveInfo.GetTimeRewindObject(currentTimeRewind);
         try
         {
-            //Debug.Log(_rewindList[currentTimeRewind].GetTransform().position);
-            //Debug.Log("found");
-            //_transform.position = _rewindList[currentTimeRewind].GetTransform().position;
-            //_rigidbody2D.MovePosition(_rewindList[(float) currentTimeRewind].GetPosition());
-            //_rewindSaveInfo.GetTimeRewindObject(currentTimeRewind);
-            _rigidbody2D.MovePosition(GetTimeRewindObject(currentTimeRewind).GetPosition());
+            _rigidbody2D.MovePosition(GetTimeRewindObject(_timeManager.GetCustomTime()).GetPosition());
         }
         catch (System.Exception)
         {
             Debug.Log("not found : " + currentTimeRewind);
-            // foreach (var values in _rewindList.Values)
-            // {
-            //     Debug.Log(values.GetTransform().position);
-            // }
-            /*Debug.Log("time didn't exist: " + currentTimeRewind);
-            foreach (var key in _rewindList.Keys)
-            {
-                if ((float) key - (float) currentTimeRewind == 0f)
-                {
-                    Debug.Log("Found the Key: " + key);
-                } else {
-                    result = (float) key - (float) currentTimeRewind;
-                    Debug.Log(key + " - " + currentTimeRewind + " != " + result);
-                }
-            }*/
         }
 
 
@@ -75,22 +63,10 @@ public class PlayerOnRewind : MonoBehaviour
         currentTimeRewind = (float) System.Math.Round(currentTimeRewind, 2);
         currentTimeRewind -= currentTimeRewind % 0.02f;
 
-        /* int l = _rewindList.Count;
-         if (l > 0)
-         {
-             // Debug.Log(l);
-             Vector3 to_move = _rewindList[l - 1];
-             _rewindList.RemoveAt(l - 1);
-             //_rigidbody2D.MovePosition(to_move);
-             _transform.position = to_move;
+        if (_timeManager.GetCustomTime() < 0.0f) {
+            _playerController.StopRewinding();
+        }
 
-         }
-         else
-         {
-             //_rigidbody2D.MovePosition(_transform.position);
-             Destroy(gameObject);
-             _playerController.StopRewinding();
-         }*/
 
     }
 
@@ -108,6 +84,17 @@ public class PlayerOnRewind : MonoBehaviour
 
         //_rewindSaveInfo = rewindSaveInfo;
         //Debug.Log("set rewind save info");
+    }
+
+    public void SetCurrentRewindTime(float new_currentRewindTime) {
+        currentTimeRewind = (float) System.Math.Round(new_currentRewindTime, 2);
+        currentTimeRewind -= currentTimeRewind % 0.02f;
+    }
+
+    public void setTimeManager(TimeManager newTimeManager) {
+        //Debug.Log("set the time manager");
+        _timeManager = newTimeManager;
+        //_rewindSaveInfo._timeManager = _timeManager;
     }
 
 
@@ -133,6 +120,11 @@ public class PlayerOnRewind : MonoBehaviour
     public float getCurrentTimeRewind()
     {
         return currentTimeRewind;
+    }
+
+    public void setIsStatic(bool isStatic)
+    {
+        _isStatic = isStatic;
     }
 
 
