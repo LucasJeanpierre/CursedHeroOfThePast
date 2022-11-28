@@ -127,6 +127,7 @@ namespace Platformer.Mechanics
 
         protected void PerformMovement(Vector2 move, bool yMovement)
         {
+            Debug.Log("Obj: " + this.transform.name);
             var distance = move.magnitude;
 
             if (distance > minMoveDistance)

@@ -69,6 +69,8 @@ MonoBehaviour:
   _timeManager: {fileID: 0}
   dashingPower: 2
   tr: {fileID: 0}
+  _cinemachineTargetGroup: {fileID: 0}
+  delayBetweenClones: 0.02
 --- !u!212 &212064061491315838
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -131,7 +133,7 @@ Animator:
   m_GameObject: {fileID: 1208144871472054}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b09e60546065cf9448b36ebb7f759a91, type: 2}
+  m_Controller: {fileID: 9100000, guid: e35a6684829b3854d9ba2c547256f832, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -278,10 +280,10 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208144871472054}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.09, y: -0.14}
@@ -309,6 +311,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 043f133062342064185bacdf154cc276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minGroundNormalY: 0.65
+  gravityModifier: 1
+  velocity: {x: 0, y: 0}
+  maxSpeed: 7
+  jumpTakeOffSpeed: 7
+  jumpState: 0
 --- !u!114 &7078394506935587691
 MonoBehaviour:
   m_ObjectHideFlags: 0
