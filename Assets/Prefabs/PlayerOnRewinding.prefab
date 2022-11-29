@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1824045667}
   - component: {fileID: 6649479971312759359}
   m_Layer: 8
+  - component: {fileID: 7078394506935587691}
   m_Name: PlayerOnRewinding
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -64,7 +65,10 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   health: {fileID: 0}
   controlEnabled: 1
-  _staticPlayerOnRewind: {fileID: 0}
+  __playerOnRewind: {fileID: 0}
+  _timeManager: {fileID: 0}
+  dashingPower: 2
+  tr: {fileID: 0}
 --- !u!212 &212064061491315838
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -305,3 +309,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 043f133062342064185bacdf154cc276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7078394506935587691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208144871472054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8030e32a25afb14b8934c533f732edc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timeManager: {fileID: 3880780656947383405, guid: 8f14d6fc0fa182843ae0fddef9ddbb12,
+    type: 3}
