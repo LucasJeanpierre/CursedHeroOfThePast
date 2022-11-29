@@ -33,7 +33,7 @@ public class TimeManager : MonoBehaviour
 
         _gameCustomTime = (float) System.Math.Round(_gameCustomTime, 2);
 
-        Debug.Log(_gameCustomTime);
+        //Debug.Log(_gameCustomTime);
     }
 
     
