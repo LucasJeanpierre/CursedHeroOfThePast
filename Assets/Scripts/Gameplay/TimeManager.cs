@@ -8,6 +8,10 @@ public class TimeManager : MonoBehaviour
 
     [SerializeField] private float _time = 0.0f;
 
+    [SerializeField] private float _timeRewindLimit = 10.0f;
+
+    private float _maxTime = 0.0f;
+
     private bool _onRewind = false;
 
 
@@ -22,6 +26,11 @@ public class TimeManager : MonoBehaviour
         } else {
             _gameCustomTime -= Time.fixedDeltaTime;
         }
+
+        if (_gameCustomTime > _maxTime) {
+            _maxTime = _gameCustomTime;
+        }
+
         _gameCustomTime = (float) System.Math.Round(_gameCustomTime, 2);
 
         Debug.Log(_gameCustomTime);
@@ -83,5 +92,13 @@ public class TimeManager : MonoBehaviour
 
     public bool getOnRewind() {
         return _onRewind;
+    }
+
+    public float getMaxTime() {
+        return _maxTime;
+    }
+
+    public float getTimeRewindLimit() {
+        return _timeRewindLimit;
     }
 }
