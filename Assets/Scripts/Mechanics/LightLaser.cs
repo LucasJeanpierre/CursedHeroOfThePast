@@ -34,12 +34,17 @@ namespace Platformer.Gameplay
         private List<ParticleSystem> particles = new List<ParticleSystem>();
 
         public Slider _slider;
+
+        private Button _LastPressedButton;
+
+        //[SerializeField] private Button _targetButton;
+
         void Start()
         {
             FillLists();
             EnableLaser();
             spawnRotation = transform.localEulerAngles.z;
-            print(spawnRotation+"spawnRotation");
+            //print(spawnRotation+"spawnRotation");
             //InvokeRepeating("LaunchLaser", startAfter, shootRate);
         }
 
@@ -50,8 +55,8 @@ namespace Platformer.Gameplay
         {
 
             if (_laserShooting) UpdateLaser();
-            
-            transform.rotation = Quaternion.Euler(0, 0, _slider.getRotation()+spawnRotation);
+
+            transform.rotation = Quaternion.Euler(0, 0, _slider.getRotation() + spawnRotation);
         }
 
         void EnableLaser()
@@ -95,23 +100,33 @@ namespace Platformer.Gameplay
         void UpdateLaser()
         {
             // Create a ray going down to check colision
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right);    
-            
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right);
+
             //Debug.Log("Forward gun: " + transform.right);
             //Debug.Log("Forward pointer: " + firePoint.forward);
 
             if (hit)
             {
                 EnableLaser();
+                
                 // Set start of laser in the gun pointer
                 lineRenderer.SetPosition(0, (Vector2)firePoint.position);
                 StartVFX.transform.position = (Vector2)firePoint.position;
                 // Set end of laser in the raycast hit position
                 lineRenderer.SetPosition(1, hit.point);
                 EndVFX.transform.position = (Vector2)lineRenderer.GetPosition(1);
-                // If laser hits player
-                if (hit.transform.name == "Player")
-                    Schedule<PlayerDeath>();
+
+                if (hit.collider.gameObject.tag == "LightTarget")
+                {
+                    Debug.Log("Hit target");
+                    _LastPressedButton = hit.collider.gameObject.GetComponent<Button>();
+                    hit.collider.gameObject.GetComponent<LightTarget>().PressButton();
+                } else {
+                    if (_LastPressedButton != null) {
+                        _LastPressedButton.unPressButton();
+                        _LastPressedButton = null;
+                    }
+                }
             }
             else
             {
@@ -124,7 +139,7 @@ namespace Platformer.Gameplay
 
         void FillLists()
         {
-            for(int i = 0; i < StartVFX.transform.childCount; i++)
+            for (int i = 0; i < StartVFX.transform.childCount; i++)
             {
                 var ps = StartVFX.transform.GetChild(i).GetComponent<ParticleSystem>();
                 if (ps != null)
