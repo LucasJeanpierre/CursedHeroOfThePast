@@ -17,10 +17,10 @@ GameObject:
   - component: {fileID: 6082575806313374961}
   - component: {fileID: 1824045667}
   - component: {fileID: 6649479971312759359}
-  m_Layer: 8
   - component: {fileID: 7078394506935587691}
+  m_Layer: 8
   m_Name: PlayerOnRewinding
-  m_TagString: Player
+  m_TagString: PlayerOnRewind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69,6 +69,8 @@ MonoBehaviour:
   _timeManager: {fileID: 0}
   dashingPower: 2
   tr: {fileID: 0}
+  _cinemachineTargetGroup: {fileID: 0}
+  delayBetweenClones: 0.02
 --- !u!212 &212064061491315838
 SpriteRenderer:
   m_ObjectHideFlags: 0

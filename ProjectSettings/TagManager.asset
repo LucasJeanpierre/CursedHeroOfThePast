@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - TutorialRequirement
+  - LightTarget
+  - PlayerOnRewind
   layers:
   - Default
   - TransparentFX
