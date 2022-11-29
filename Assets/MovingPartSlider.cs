@@ -7,7 +7,13 @@ public class MovingPartSlider : MonoBehaviour
 
     private Transform _transform;
     private Rigidbody2D _rigidbody2D;
+
+    private BoxCollider2D _boxCollider2D;
     private bool outOfSliderBounds;
+
+    [SerializeField] private TimeManager _timeManager;
+
+    private SpriteRenderer _movingPartSpriteRenderer;
 
 
     private Slider _slider;    
@@ -18,8 +24,10 @@ public class MovingPartSlider : MonoBehaviour
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _transform = GetComponent<Transform>();
+        _boxCollider2D = GetComponent<BoxCollider2D>();
         _slider = this.GetComponentInParent<Slider>();
         outOfSliderBounds = false;
+        _movingPartSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
@@ -40,9 +48,33 @@ public class MovingPartSlider : MonoBehaviour
     void Update()
     {
         float _sliderWidth = _slider.getSliderWidth();
-        bool outOfSliderBounds = (_transform.position.x > _slider.transform.position.x + _sliderWidth/2)||( _transform.position.x < _slider.transform.position.x - _sliderWidth/2);
-        if(outOfSliderBounds) {
+        bool outOFBoundsLeft = _transform.position.x < _slider.transform.position.x - _sliderWidth/2;
+        bool outOFBoundsRight = _transform.position.x > _slider.transform.position.x + _sliderWidth/2;
+        if (outOFBoundsLeft) {
+            _transform.position = new Vector3(_slider.transform.position.x - _sliderWidth/2, _transform.position.y, _transform.position.z);
             _rigidbody2D.velocity = Vector2.zero;
+            StartCoroutine("CoolDownCollisionEnable");
         }
+        else if (outOFBoundsRight) {
+            _transform.position = new Vector3(_slider.transform.position.x + _sliderWidth/2, _transform.position.y, _transform.position.z);
+            _rigidbody2D.velocity = Vector2.zero;
+            StartCoroutine("CoolDownCollisionEnable");
+        }
+
+        // if (_timeManager.isRewinding()) {
+        //     _movingPartSpriteRenderer.color = Color.white;
+        // } else {
+        //     _movingPartSpriteRenderer.color = _slider.GetComponent<SpriteRenderer>().color;
+        // }
+    }
+
+    IEnumerator CoolDownCollisionEnable() {
+        _boxCollider2D.enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        _boxCollider2D.enabled = true;
+    }
+
+    public float getSliderPosition() {
+        return transform.localPosition.x;
     }
 }

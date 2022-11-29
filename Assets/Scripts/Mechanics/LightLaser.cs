@@ -24,8 +24,7 @@ namespace Platformer.Gameplay
         public float shootRate = 1.0f;
 
         // Rotating propriety
-        public float rotationTarget = 0.0f;
-
+        private float spawnRotation;
         public bool rotateLaser = false;
         public float rotateSpeed = 0.5f;
 
@@ -34,11 +33,13 @@ namespace Platformer.Gameplay
 
         private List<ParticleSystem> particles = new List<ParticleSystem>();
 
-
+        public Slider _slider;
         void Start()
         {
             FillLists();
             EnableLaser();
+            spawnRotation = transform.localEulerAngles.z;
+            print(spawnRotation+"spawnRotation");
             //InvokeRepeating("LaunchLaser", startAfter, shootRate);
         }
 
@@ -50,8 +51,7 @@ namespace Platformer.Gameplay
 
             if (_laserShooting) UpdateLaser();
             
-            transform.rotation = Quaternion.Euler(0, 0, rotationTarget);
-            
+            transform.rotation = Quaternion.Euler(0, 0, _slider.getRotation()+spawnRotation);
         }
 
         void EnableLaser()

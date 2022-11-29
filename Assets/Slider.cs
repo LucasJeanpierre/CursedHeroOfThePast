@@ -8,11 +8,14 @@ public class Slider : MonoBehaviour
     private MovingPartSlider _movingPartSlider;
     private float _sliderWidth;
 
+    public float _openingAngle = 360f;
+
     // Start is called before the first frame update
     void Start()
     {
         _movingPartSlider = this.GetComponentInChildren<MovingPartSlider>();
         _sliderWidth = this.GetComponent<SpriteRenderer>().bounds.size.x;
+        
     }
 
     public float getSliderWidth() {
@@ -21,6 +24,9 @@ public class Slider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(_movingPartSlider.transform.position.x);
+    }
+
+    public float getRotation(){
+        return (_movingPartSlider.getSliderPosition()*_openingAngle);
     }
 }

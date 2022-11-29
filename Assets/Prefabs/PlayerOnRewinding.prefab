@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6082575806313374961}
   - component: {fileID: 1824045667}
   - component: {fileID: 6649479971312759359}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: PlayerOnRewinding
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208144871472054}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
