@@ -55,7 +55,7 @@ MonoBehaviour:
   EndVFX: {fileID: 7593526520183866266}
   startAfter: 1
   shootRate: 1
-  rotateLaser: 1
+  rotateLaser: 0
   rotateSpeed: 0.5
 --- !u!114 &3012050406829600077
 MonoBehaviour:
@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8030e32a25afb14b8934c533f732edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _timeManager: {fileID: 0}
 --- !u!1 &7593526519247356058
 GameObject:
   m_ObjectHideFlags: 0
