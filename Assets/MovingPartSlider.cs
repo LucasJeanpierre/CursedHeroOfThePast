@@ -30,23 +30,24 @@ public class MovingPartSlider : MonoBehaviour
         _movingPartSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void OnCollisionEnter2D(Collision2D other) {
-        if(!outOfSliderBounds){
-            Rigidbody2D otherRigidbody2D = other.collider.GetComponent<Rigidbody2D>();
-            if(otherRigidbody2D != null) {
-                Vector2 forceDirection = other.gameObject.transform.position - _transform.position;
-                forceDirection.y =0;
-                forceDirection.Normalize();
-                Debug.Log(forceDirection);
-                _rigidbody2D.velocity = forceDirection * forceMagnitude;
-                //_rigidbody2D.AddForce(forceDirection * forceMagnitude, ForceMode2D.Impulse);
-            }
-        }
-    }
+    // private void OnCollisionEnter2D(Collision2D other) {
+    //     if(!outOfSliderBounds){
+    //         Rigidbody2D otherRigidbody2D = other.collider.GetComponent<Rigidbody2D>();
+    //         if(otherRigidbody2D != null) {
+    //             Vector2 forceDirection = other.gameObject.transform.position - _transform.position;
+    //             forceDirection.y =0;
+    //             forceDirection.Normalize();
+    //             Debug.Log(forceDirection);
+    //             _rigidbody2D.velocity = forceDirection * forceMagnitude;
+    //             //_rigidbody2D.AddForce(forceDirection * forceMagnitude, ForceMode2D.Impulse);
+    //         }
+    //     }
+    // }
 
     // Update is called once per frame
     void Update()
     {
+        _rigidbody2D.velocity = Vector2.zero;
         float _sliderWidth = _slider.getSliderWidth();
         bool outOFBoundsLeft = _transform.position.x < _slider.transform.position.x - _sliderWidth/2;
         bool outOFBoundsRight = _transform.position.x > _slider.transform.position.x + _sliderWidth/2;
@@ -70,7 +71,7 @@ public class MovingPartSlider : MonoBehaviour
 
     IEnumerator CoolDownCollisionEnable() {
         _boxCollider2D.enabled = false;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         _boxCollider2D.enabled = true;
     }
 

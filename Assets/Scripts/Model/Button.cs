@@ -8,7 +8,9 @@ public class Button : MonoBehaviour
 {
     
     
-    private bool isPressed = false;
+    [SerializeField] private bool isPressed = false;
+
+
     // private int nbcollision = 0;
     [SerializeField] private float _buttonDelayOnRelease = 4f;
     
@@ -20,21 +22,25 @@ public class Button : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        PressButton();
+    }
+
+    public void PressButton()
+    {
         isPressed = true;
         GetComponent<SpriteRenderer>().color = Color.red;
-        // nbcollision++;
     }
 
 
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        // nbcollision--;
-        // if (nbcollision == 0)
-    
-        StartCoroutine("unPressButtonAfterDelay");
-        
-
+        Debug.Log(other.gameObject.tag);
+        if (other.gameObject.tag == "Player")
+        {
+            StartCoroutine("unPressButtonAfterDelay");
+        }
+        //StartCoroutine("unPressButtonAfterDelay");
     }
 
     public bool getButtonState()
@@ -48,13 +54,13 @@ public class Button : MonoBehaviour
     
     }
 
-    private void unPressButton()
+    public void unPressButton()
     {
         isPressed = false;
         GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    IEnumerator unPressButtonAfterDelay()
+    public IEnumerator unPressButtonAfterDelay()
     {
         yield return new WaitForSeconds(_buttonDelayOnRelease);
         unPressButton();
