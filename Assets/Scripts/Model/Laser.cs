@@ -49,7 +49,7 @@ namespace Platformer.Gameplay
                 UpdateLaser();
             if (rotateLaser)
             {
-                Vector3 rotationToAdd = new Vector3(0, 0, rotateSpeed);
+                Vector3 rotationToAdd = new Vector3(0, 0, rotateSpeed * Time.deltaTime);
                 transform.Rotate(rotationToAdd);
             }
         }

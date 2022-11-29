@@ -22,22 +22,25 @@ public class RewindSaveInfo : MonoBehaviour
     private void FixedUpdate()
     {
         _transform = GetComponent<Transform>();
-        if (!_timeManager.getOnRewind()) {
+        if (!_timeManager.getOnRewind())
+        {
+            Debug.Log("Add");
             IncrementRewindingList();
-        }   
+        }
     }
 
 
     public void IncrementRewindingList()
     {
-      AddTimeRewindObject(CreateTimeRewindObject(), _timeManager.GetCustomTime());
-        
+        Debug.Log("IncrementRewindingList");
+        AddTimeRewindObject(CreateTimeRewindObject(), _timeManager.GetCustomTime());
     }
 
     public TimeRewindObject CreateTimeRewindObject()
     {
+        //Debug.Log("Creating time rewind object at position: " + _transform.position);
         return new TimeRewindObject(
-            new Vector3(_transform.position.x, _transform.position.y, _transform.position.z),   
+            new Vector3(_transform.position.x, _transform.position.y, _transform.position.z),
             new Vector3(_transform.eulerAngles.x, _transform.eulerAngles.y, _transform.eulerAngles.z),
             new Vector3(_transform.localScale.x, _transform.localScale.y, _transform.localScale.z),
             true);
@@ -51,9 +54,10 @@ public class RewindSaveInfo : MonoBehaviour
         }
         catch (System.Exception)
         {
+            //Debug.Log("Already existing key: " + time);
             _timeRewindObjects[time] = timeRewindObject;
         }
-        
+
         //Debug.Log("Current time: " + time + " | " + "Current rotation: " + _timeRewindObjects[time].GetTransform().rotation);
     }
 
@@ -75,7 +79,8 @@ public class RewindSaveInfo : MonoBehaviour
     }
 
 
-    public void RewindTo(float time) {
+    public void RewindTo(float time)
+    {
         Debug.Log("Rewind to: " + time);
         Debug.Log("Rotation: " + this.GetTimeRewindObject(time).GetRotation());
 
@@ -84,14 +89,14 @@ public class RewindSaveInfo : MonoBehaviour
         _transform.localScale = this.GetTimeRewindObject(time).GetScale();
     }
 
-     private TimeRewindObject GetTimeRewindObject(float time)
+    private TimeRewindObject GetTimeRewindObject(float time)
     {
         //iterate through the list to find the time
         foreach (KeyValuePair<float, TimeRewindObject> element in _timeRewindObjects)
         {
-            float result = (float) element.Key - (float) time;
-            
-            if ((float) System.Math.Round(result, 2) == 0.00f)
+            float result = (float)element.Key - (float)time;
+
+            if ((float)System.Math.Round(result, 2) == 0.00f)
             {
                 return element.Value;
             }
