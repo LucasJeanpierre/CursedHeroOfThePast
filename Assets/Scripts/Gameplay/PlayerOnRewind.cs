@@ -63,7 +63,7 @@ public class PlayerOnRewind : MonoBehaviour
         currentTimeRewind = (float) System.Math.Round(currentTimeRewind, 2);
         currentTimeRewind -= currentTimeRewind % 0.02f;
 
-        if (_timeManager.GetCustomTime() < 0.0f) {
+        if (_timeManager.GetCustomTime() < _timeManager.getMaxTime() - _timeManager.getTimeRewindLimit()) {
             _playerController.StopRewinding();
         }
 
