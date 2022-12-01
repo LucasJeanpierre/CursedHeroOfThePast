@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1824045667}
   - component: {fileID: -4462045721549992892}
   - component: {fileID: -3198048411450956293}
+  - component: {fileID: 4872684581763571985}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -65,9 +66,11 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   health: {fileID: 0}
   controlEnabled: 1
-  __playerOnRewind: {fileID: 0}
-  _timeManager: {fileID: 0}
-  dashingPower: 24
+  __playerOnRewind: {fileID: 6649479971312759359, guid: 87bf45b3e16b8d241bdfbca6bb68a57f,
+    type: 3}
+  _timeManager: {fileID: 3880780656947383405, guid: 8f14d6fc0fa182843ae0fddef9ddbb12,
+    type: 3}
+  dashingPower: 2
   tr: {fileID: -4462045721549992892}
   _cinemachineTargetGroup: {fileID: 0}
   delayBetweenClones: 0.02
@@ -151,7 +154,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208144871472054}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
@@ -419,4 +422,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8030e32a25afb14b8934c533f732edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeManager: {fileID: 0}
+  _timeManager: {fileID: 3880780656947383405, guid: 8f14d6fc0fa182843ae0fddef9ddbb12,
+    type: 3}
+--- !u!114 &4872684581763571985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208144871472054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b775ed991de813841a6ad7061933d1c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeManager: {fileID: 3880780656947383405, guid: 8f14d6fc0fa182843ae0fddef9ddbb12,
+    type: 3}

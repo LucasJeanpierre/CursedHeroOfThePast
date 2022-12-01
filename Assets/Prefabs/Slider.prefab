@@ -152,7 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f633d5a07d2f7d46886b34b8fbef00b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeManager: {fileID: 0}
+  _timeManager: {fileID: 3880780656947383405, guid: 8f14d6fc0fa182843ae0fddef9ddbb12,
+    type: 3}
   forceMagnitude: 1
 --- !u!212 &796123850140389718
 SpriteRenderer:

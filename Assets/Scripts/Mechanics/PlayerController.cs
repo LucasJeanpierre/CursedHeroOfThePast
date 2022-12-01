@@ -60,7 +60,7 @@ namespace Platformer.Mechanics
 
         private PlayerOnRewind _playerOnRewind;
 
-        [SerializeField] private TimeManager _timeManager;
+        [SerializeField] public TimeManager _timeManager;
 
 
         private float _facingDirection = 1f;
@@ -162,6 +162,8 @@ namespace Platformer.Mechanics
             base.Update();
         }
 
+        
+
         public void StartRewinding()
         {
             _timeManager.setOnRewind(true);
@@ -169,6 +171,7 @@ namespace Platformer.Mechanics
             _playerOnRewind = Instantiate(__playerOnRewind, _transform.position, _transform.rotation);
             _playerOnRewind.setRewindSaveInfo(rewindSaveInfo);
             _playerOnRewind.setTimeManager(_timeManager);
+            Debug.Log(_playerOnRewind._timeManager);
             //_playerOnRewind.SetCurrentRewindTime(_timeManager.GetCustomTime());
             _playerOnRewind.setPlayerController(this);
 
@@ -180,9 +183,9 @@ namespace Platformer.Mechanics
         public void CreateClone()
         {
             PlayerOnRewind clone = Instantiate(__playerOnRewind, _playerOnRewind.transform.position, _playerOnRewind.transform.rotation);
-            //clone.setRewindSaveInfo(rewindSaveInfo);
-            //clone.setTimeManager(_timeManager);
-            //clone.setPlayerController(this);
+            // clone.setRewindSaveInfo(rewindSaveInfo);
+            // clone.setTimeManager(_timeManager);
+            // clone.setPlayerController(this);
             clone.setIsStatic(true);
 
             _clones.Add(clone);
@@ -205,6 +208,8 @@ namespace Platformer.Mechanics
             
 
             //go trough the list of clones and destroy them
+            //Debug.Log(gameObject.name);
+            //Debug.Log(_playerOnRewind.gameObject.name);
             coroutine = TeleportToAllClonesPositions(delayBetweenClones);
             StartCoroutine(coroutine);
 
@@ -316,6 +321,7 @@ namespace Platformer.Mechanics
 
             _clones = new List<PlayerOnRewind>();
 
+            
              if (_playerOnRewind != null)
             {
                 _transform.position = _playerOnRewind.transform.position;

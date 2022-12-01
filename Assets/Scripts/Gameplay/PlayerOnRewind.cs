@@ -17,7 +17,7 @@ public class PlayerOnRewind : MonoBehaviour
 
     private Rigidbody2D _rigidbody2D;
 
-    private TimeManager _timeManager;
+    public TimeManager _timeManager;
 
     private float result;
 
@@ -59,9 +59,9 @@ public class PlayerOnRewind : MonoBehaviour
         }
 
 
-        currentTimeRewind -= Time.fixedDeltaTime;
+        /*currentTimeRewind -= Time.fixedDeltaTime;
         currentTimeRewind = (float) System.Math.Round(currentTimeRewind, 2);
-        currentTimeRewind -= currentTimeRewind % 0.02f;
+        currentTimeRewind -= currentTimeRewind % 0.02f;*/
 
         if ((_timeManager.GetCustomTime() < _timeManager.getMaxTime() - _timeManager.getTimeRewindLimit()) || (_timeManager.GetCustomTime() < 0f)) {
             _playerController.StopRewinding();
@@ -72,6 +72,7 @@ public class PlayerOnRewind : MonoBehaviour
 
     public void setRewindSaveInfo(RewindSaveInfo rewindSaveInfo)
     {
+        Debug.Log("rewindSaveInfo list size: " + rewindSaveInfo.GetLength());
         //reset _rewindSaveInfo
         _rewindList = new Dictionary<float, TimeRewindObject>();
 
@@ -81,6 +82,8 @@ public class PlayerOnRewind : MonoBehaviour
             _rewindList.Add((float) element.Key, element.Value);
             //Debug.Log("Added: " + element.Key + " | " + element.Value.GetPosition());
         }
+
+        Debug.Log("Rewind list size: " + _rewindList.Count);
 
         //_rewindSaveInfo = rewindSaveInfo;
         //Debug.Log("set rewind save info");
@@ -107,6 +110,7 @@ public class PlayerOnRewind : MonoBehaviour
             
             if ((float) System.Math.Round(result, 2) == 0.00f)
             {
+                //Debug.Log(element.Value);
                 return element.Value;
             }
         }
