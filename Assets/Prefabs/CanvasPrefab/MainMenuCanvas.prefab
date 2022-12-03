@@ -1342,6 +1342,7 @@ MonoBehaviour:
   - {fileID: 5530165967858732455}
   - {fileID: 5530165967823901813}
   - {fileID: 5530165967678027652}
+  metaGameController: {fileID: 0}
 --- !u!223 &5530165966959317135
 Canvas:
   m_ObjectHideFlags: 0
@@ -2383,8 +2384,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281874488
-  m_fontColor: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Platformer.UI;
 using UnityEngine;
 using Platformer.Mechanics;
 
@@ -17,7 +18,7 @@ public class MainMenuController : MonoBehaviour
 
     private Dictionary<PanelType, MenuPanel> panelsDict = new Dictionary<PanelType, MenuPanel>();
 
-
+    [SerializeField] private MetaGameController metaGameController;
     private GameController gameController;
 
     // Start is called before the first frame update
@@ -48,6 +49,9 @@ public class MainMenuController : MonoBehaviour
         OpenOnePanel(panelType);
     }
 
+    public void Resume(){
+        metaGameController.ToggleMainMenu(false);
+    }
     public void ChangeScene(string sceneName)
     {
         gameController.ChangeScene(sceneName);
