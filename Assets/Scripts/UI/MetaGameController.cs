@@ -13,7 +13,7 @@ namespace Platformer.UI
         /// <summary>
         /// The main UI object which used for the menu.
         /// </summary>
-        public MainUIController mainMenu;
+        public MainMenuController mainMenu;
 
         /// <summary>
         /// A list of canvas objects which are used during gameplay (when the main ui is turned off)
@@ -65,6 +65,8 @@ namespace Platformer.UI
         {
             if (Input.GetButtonDown("Menu"))
             {
+                mainMenu.gameObject.SetActive(true);
+                Debug.Log("Menu button pressed"+showMainCanvas);
                 ToggleMainMenu(show: !showMainCanvas);
             }
         }
