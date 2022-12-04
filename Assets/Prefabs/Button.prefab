@@ -125,4 +125,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7906ea919b3309f42924f038217c05f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPressed: 0
   _buttonDelayOnRelease: 0.2
