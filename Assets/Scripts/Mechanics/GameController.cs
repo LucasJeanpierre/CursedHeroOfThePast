@@ -34,5 +34,15 @@ namespace Platformer.Mechanics
         {
             if (Instance == this) Simulation.Tick();
         }
+
+        public void ChangeScene(string sceneName)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        }
+
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     }
 }
