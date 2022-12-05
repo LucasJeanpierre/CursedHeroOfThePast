@@ -57,7 +57,7 @@ public class Button : MonoBehaviour
     public void unPressButton()
     {
         isPressed = false;
-        GetComponent<SpriteRenderer>().color = Color.white;
+        GetComponent<SpriteRenderer>().color = Color.blue;
     }
 
     public IEnumerator unPressButtonAfterDelay()
