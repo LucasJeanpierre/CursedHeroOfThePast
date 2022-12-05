@@ -67,6 +67,7 @@ public class Door : MonoBehaviour
         }
         if (_moveCameraFromDoor){
             var doorTargetNumber = _cinemachineTargetGroup.FindMember(_transform);
+            if (doorTargetNumber == -1) return; // If door is not in the target group (because it was removed)
             _cinemachineTargetGroup.m_Targets[doorTargetNumber].weight = _weightValue;
             if (_cinemachineTargetGroup.m_Targets[doorTargetNumber].weight == 0f)
                 _cinemachineTargetGroup.RemoveMember(_transform);
