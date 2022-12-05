@@ -150,12 +150,23 @@ PrefabInstance:
     - target: {fileID: 5530165966959317138, guid: ee7bb0eeca439034abd43f2284c07e36,
         type: 3}
       propertyPath: m_Name
-      value: PauseMenuCanvas
+      value: PauseMenuCanvas Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5530165966959317138, guid: ee7bb0eeca439034abd43f2284c07e36,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530165967823901818, guid: ee7bb0eeca439034abd43f2284c07e36,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530165968082536163, guid: ee7bb0eeca439034abd43f2284c07e36,
+        type: 3}
+      propertyPath: m_text
+      value: "Credits : \nGustavo Torrico, \nLucas Jeanpierre, \nBaptiste Sourisseau,
+        \nLucas Fourest, ..."
       objectReference: {fileID: 0}
     - target: {fileID: 5530165968225115760, guid: ee7bb0eeca439034abd43f2284c07e36,
         type: 3}

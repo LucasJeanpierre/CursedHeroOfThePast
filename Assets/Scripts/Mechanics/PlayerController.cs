@@ -113,11 +113,11 @@ namespace Platformer.Mechanics
                 StartCoroutine("Dash");
             }
 
-            if (Input.GetKeyDown(KeyCode.Backspace) && (_onRewind == true))
+            if (Input.GetKeyDown(KeyCode.C) && (_onRewind == true))
             {
                 StopRewinding();
             }
-            else if (Input.GetKeyDown(KeyCode.Backspace) && (_onRewind == false))
+            else if (Input.GetKeyDown(KeyCode.C) && (_onRewind == false))
             {
                 StartRewinding();
             } 
