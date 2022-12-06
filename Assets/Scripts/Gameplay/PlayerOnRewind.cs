@@ -71,7 +71,7 @@ public class PlayerOnRewind : MonoBehaviour
             else
                 _spriteRenderer.flipX = true;
 
-            if (Math.Abs(_transform.position.y - GetTimeRewindObject(_timeManager.GetCustomTime()).GetPosition().y) < 0.01f)
+            if (Math.Abs(_transform.position.y - GetTimeRewindObject(_timeManager.GetCustomTime()).GetPosition().y) < 0.0001f)
             {
                 animator.SetBool("grounded", true);
                 animator.SetFloat("velocityX", Mathf.Abs((_transform.position.x - GetTimeRewindObject(_timeManager.GetCustomTime()).GetPosition().x) / Time.deltaTime) / maxSpeed);

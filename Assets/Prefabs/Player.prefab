@@ -120,7 +120,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.28, y: 1.26}
+  m_Size: {x: 0.46341464, y: 0.85365856}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -290,18 +290,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0034707785, y: 0.0058680773}
+  m_Offset: {x: -0.0034707785, y: 0.0024312437}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.46341464, y: 0.85365856}
-    newSize: {x: 1.28, y: 1.26}
+    newSize: {x: 0.46341464, y: 0.85365856}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.49305844, y: 0.866658}
+  m_Size: {x: 0.49305844, y: 0.8597843}
   m_EdgeRadius: 0
 --- !u!96 &-4462045721549992892
 TrailRenderer:
