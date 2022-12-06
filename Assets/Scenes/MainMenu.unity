@@ -609,6 +609,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5530165968082536163, guid: ee7bb0eeca439034abd43f2284c07e36,
+        type: 3}
+      propertyPath: m_text
+      value: "Credits : \nGustavo Torrico, \nLucas Jeanpierre, \nBaptiste Sourisseau,
+        \nLucas Fourest, ..."
+      objectReference: {fileID: 0}
     - target: {fileID: 5530165968225115762, guid: ee7bb0eeca439034abd43f2284c07e36,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
