@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: -4462045721549992892}
   - component: {fileID: -3198048411450956293}
   - component: {fileID: 4872684581763571985}
+  - component: {fileID: -2156926228391331002}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -59,6 +60,15 @@ MonoBehaviour:
   jumpAudio: {fileID: 8300000, guid: 67975c08d56ceb147bad38572d805aa8, type: 3}
   respawnAudio: {fileID: 8300000, guid: e18959d46b63f3c4c8cc020a433cf848, type: 3}
   ouchAudio: {fileID: 8300000, guid: 6c05149e5a2fba64ba172e25a61074b7, type: 3}
+  PlayerControls:
+    m_Name: Player Controls
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 60f08c4d-abf6-4487-a9a6-179d2cabe43c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   maxSpeed: 3
   jumpTakeOffSpeed: 7
   jumpState: 0
@@ -439,3 +449,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeManager: {fileID: 3880780656947383405, guid: 8f14d6fc0fa182843ae0fddef9ddbb12,
     type: 3}
+--- !u!114 &-2156926228391331002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208144871472054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: e05780ad1e8b8304793693985eb3a3ad,
+    type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

@@ -7,6 +7,7 @@ using Platformer.Model;
 using Platformer.Core;
 using System;
 using Cinemachine;
+using UnityEngine.InputSystem;
 
 namespace Platformer.Mechanics
 {
@@ -19,6 +20,16 @@ namespace Platformer.Mechanics
         public AudioClip jumpAudio;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
+
+        public PlayerControls _playerControls;
+
+        private InputAction jumpInputAction;
+        private InputAction dashInputAction;
+        private InputAction moveInputAction;
+        private InputAction rewindInputAction;
+        private InputAction createCloneInputAction;
+
+        //public PlayerActions PlayerControls;
 
         /// <summary>
         /// Max horizontal speed of the player.
@@ -83,8 +94,15 @@ namespace Platformer.Mechanics
 
 
         [SerializeField] private float delayBetweenClones = 0.02f;
-        
+
         //private GravityModifier _gravityModifier;
+
+        void OnEnable()
+        {
+            base.OnEnable();
+            //_playerControls.Player.Enable();
+        }
+
 
         void Awake()
         {
@@ -97,6 +115,48 @@ namespace Platformer.Mechanics
             //_gravityModifier = GetComponent<gra
             _transform = this.transform;
             rewindSaveInfo = GetComponent<RewindSaveInfo>();
+            _playerControls = new PlayerControls();
+
+            dashInputAction = _playerControls.Player.Dash;
+            dashInputAction.Enable();
+            dashInputAction.performed += OnDashInput;
+
+            rewindInputAction = _playerControls.Player.Rewind;
+            rewindInputAction.Enable();
+            rewindInputAction.performed += OnRewindInput;
+
+            createCloneInputAction = _playerControls.Player.CreateClone;
+            createCloneInputAction.Enable();
+            createCloneInputAction.performed += OnCreateCloneInput;
+
+            moveInputAction = _playerControls.Player.Move;
+            moveInputAction.Enable();
+        }
+
+        private void OnDashInput(InputAction.CallbackContext context)
+        {
+            if (canDash)
+            {
+                StartCoroutine("Dash");
+            }
+        }
+
+        private void OnRewindInput(InputAction.CallbackContext context)
+        {
+            if (_onRewind == true)
+            {
+                //StopRewinding();
+            }
+            else
+            {
+                StartRewinding();
+            }
+        }
+
+        private void OnCreateCloneInput(InputAction.CallbackContext context)
+        {
+            if(_onRewind == true)
+                CreateClone();
         }
 
         protected override void Update()
@@ -108,23 +168,19 @@ namespace Platformer.Mechanics
                 return;
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
-            {
-                StartCoroutine("Dash");
-            }
-
-            if (Input.GetKeyDown(KeyCode.C) && (_onRewind == true))
-            {
-                StopRewinding();
-            }
-            else if (Input.GetKeyDown(KeyCode.C) && (_onRewind == false))
-            {
-                StartRewinding();
-            } 
-            else if (Input.GetKeyDown(KeyCode.LeftControl) && (_onRewind == true))
-            {
-                CreateClone();
-            }
+            // if (Input.GetKeyDown(KeyCode.C) && (_onRewind == true))
+            // {
+            //     StopRewinding();
+            // }
+            // else if (Input.GetKeyDown(KeyCode.C) && (_onRewind == false))
+            // {
+            //     StartRewinding();
+            // }
+            // else 
+            // if (Input.GetKeyDown(KeyCode.LeftControl) && (_onRewind == true))
+            // {
+            //     CreateClone();
+            // }
 
             else
             {
@@ -162,10 +218,11 @@ namespace Platformer.Mechanics
             base.Update();
         }
 
-        
+
 
         public void StartRewinding()
         {
+            //_timeManager = GameObject.Find("TimeManager").GetComponent<TimeManager>();
             _timeManager.setOnRewind(true);
             _onRewind = true;
             _playerOnRewind = Instantiate(__playerOnRewind, _transform.position, _transform.rotation);
@@ -205,7 +262,7 @@ namespace Platformer.Mechanics
             //controlEnabled = true;
             //staticPlayerOnRewind.Destroy();
 
-            
+
 
             //go trough the list of clones and destroy them
             //Debug.Log(gameObject.name);
@@ -321,8 +378,8 @@ namespace Platformer.Mechanics
 
             _clones = new List<PlayerOnRewind>();
 
-            
-             if (_playerOnRewind != null)
+
+            if (_playerOnRewind != null)
             {
                 _transform.position = _playerOnRewind.transform.position;
                 _timeManager.RewindAllAffectedObjects();
