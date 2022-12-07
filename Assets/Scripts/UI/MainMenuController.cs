@@ -8,7 +8,8 @@ public enum PanelType{
     None,
     Main,
     Options,
-    Credits
+    Credits,
+    Feedback
 }
 
 public class MainMenuController : MonoBehaviour
