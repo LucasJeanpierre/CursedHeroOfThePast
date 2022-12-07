@@ -25,6 +25,28 @@ MonoBehaviour:
   texture:
     m_OverrideState: 1
     m_Value: {fileID: 0}
+--- !u!114 &-5890366562203119551
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
+  m_Name: LiftGammaGain
+  m_EditorClassIdentifier: 
+  active: 0
+  lift:
+    m_OverrideState: 0
+    m_Value: {x: 0.9766661, y: 0.9945413, z: 1, w: 0.1899593}
+  gamma:
+    m_OverrideState: 1
+    m_Value: {x: 0.95472527, y: 0.99999976, z: 1, w: -0.000000043158884}
+  gain:
+    m_OverrideState: 1
+    m_Value: {x: 0.98726666, y: 1, z: 0.79124975, w: 0.25780186}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41,6 +63,7 @@ MonoBehaviour:
   - {fileID: 7687954566036202674}
   - {fileID: 9143953834382827284}
   - {fileID: -6447150529942367476}
+  - {fileID: -5890366562203119551}
 --- !u!114 &7687954566036202674
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -59,10 +82,10 @@ MonoBehaviour:
     m_Value: 0.9
   intensity:
     m_OverrideState: 1
-    m_Value: 1.5
+    m_Value: 20
   scatter:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 0.2
   clamp:
     m_OverrideState: 1
     m_Value: 65472
@@ -71,13 +94,14 @@ MonoBehaviour:
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   highQualityFiltering:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   skipIterations:
     m_OverrideState: 1
     m_Value: 1
   dirtTexture:
     m_OverrideState: 1
     m_Value: {fileID: 0}
+    dimension: 1
   dirtIntensity:
     m_OverrideState: 1
     m_Value: 0
