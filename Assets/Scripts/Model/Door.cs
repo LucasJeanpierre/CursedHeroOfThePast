@@ -5,6 +5,9 @@ using Cinemachine;
 
 public class Door : MonoBehaviour
 {
+    public AudioClip openDoor;
+    public AudioSource audioSource;
+
     [SerializeField] CinemachineTargetGroup _cinemachineTargetGroup;
     private Transform _transform;
 
@@ -23,6 +26,11 @@ public class Door : MonoBehaviour
     void Start()
     {
         _transform = this.transform;
+    }
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void open()
@@ -57,6 +65,8 @@ public class Door : MonoBehaviour
 
         if (_toBeOpen){
             open();
+            if (this.audioSource && this.openDoor)
+                this.audioSource.PlayOneShot(this.openDoor);
         }
 
         if (_moveCameraToDoor){
