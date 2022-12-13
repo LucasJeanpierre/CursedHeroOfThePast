@@ -32,7 +32,7 @@ public class PlayerTimeEffect : MonoBehaviour
      * */
     private void ChangeColorAccordingTime(float time)
     {
-        hue = 0.166f;
+        /*hue = 0.166f;
         hue += time / 100;
 
         if (hue < 0)
@@ -43,6 +43,6 @@ public class PlayerTimeEffect : MonoBehaviour
             hue = 0.4f;
         }
         spriteColor = Color.HSVToRGB(hue, 1, 1);
-        spriteRenderer.color = spriteColor;
+        spriteRenderer.color = spriteColor;*/
     }
 }

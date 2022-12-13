@@ -7,6 +7,7 @@ TagManager:
   - TutorialRequirement
   - LightTarget
   - PlayerOnRewind
+  - GameMusic
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Player
   - RewindPlayer
   - Slider
-  - 
+  - Post Processing
   - 
   - 
   - 
