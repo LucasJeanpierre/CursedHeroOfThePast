@@ -81,7 +81,7 @@ namespace Platformer.Gameplay
         void UpdateLaser()
         {
             // Create a ray going down to check colision
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, -transform.up);
+            RaycastHit2D hit = Physics2D.Raycast((Vector2)firePoint.position, transform.right);
             
             //Debug.Log("Forward gun: " + transform.right);
             //Debug.Log("Forward pointer: " + firePoint.forward);
