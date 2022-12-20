@@ -83,8 +83,10 @@ namespace Platformer.Mechanics
 
 
         [SerializeField] private float delayBetweenClones = 0.02f;
-        
+
         //private GravityModifier _gravityModifier;
+
+        public bool timeRewindLimitTeleport = false;
 
         void Awake()
         {

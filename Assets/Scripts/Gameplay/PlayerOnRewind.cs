@@ -11,7 +11,7 @@ public class PlayerOnRewind : MonoBehaviour
 
     private RewindSaveInfo _rewindSaveInfo;
 
-    private Dictionary<float, TimeRewindObject> _rewindList;
+    public Dictionary<float, TimeRewindObject> _rewindList;
     private PlayerController _playerController;
     private Transform _transform;
 
@@ -30,7 +30,6 @@ public class PlayerOnRewind : MonoBehaviour
     public float maxSpeed = 7;
 
     private SpriteRenderer _spriteRenderer;
-
 
     // Start is called before the first frame update
     void Start()
@@ -94,6 +93,8 @@ public class PlayerOnRewind : MonoBehaviour
         currentTimeRewind = (float) System.Math.Round(currentTimeRewind, 2);
         currentTimeRewind -= currentTimeRewind % 0.02f;*/
 
+        if (_timeManager.GetCustomTime() < _timeManager.getMaxTime() - _timeManager.getTimeRewindLimit())
+            _playerController.timeRewindLimitTeleport = true;
         if ((_timeManager.GetCustomTime() < _timeManager.getMaxTime() - _timeManager.getTimeRewindLimit()) || (_timeManager.GetCustomTime() < 0f))
         {
             _playerController.StopRewinding();
