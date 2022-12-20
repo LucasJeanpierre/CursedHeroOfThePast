@@ -7,6 +7,7 @@ using Platformer.Model;
 using Platformer.Core;
 using System;
 using Cinemachine;
+using UnityEngine.InputSystem;
 
 namespace Platformer.Mechanics
 {
@@ -19,6 +20,15 @@ namespace Platformer.Mechanics
         public AudioClip jumpAudio;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
+
+
+        public PlayerControls _playerControls;
+
+        private InputAction jumpInputAction;
+        private InputAction dashInputAction;
+        private InputAction moveInputAction;
+        private InputAction rewindInputAction;
+        private InputAction createCloneInputAction;
 
         /// <summary>
         /// Max horizontal speed of the player.
@@ -69,6 +79,7 @@ namespace Platformer.Mechanics
         public float dashingPower = 2f;
         private float dashingTime = 0.2f;
         private float dashingCooldown = 1f;
+        private float _jumppress; 
 
 
         private IEnumerator coroutine;
@@ -88,6 +99,18 @@ namespace Platformer.Mechanics
 
         public bool timeRewindLimitTeleport = false;
 
+        void OnEnable()
+        {
+            base.OnEnable();
+            _playerControls.Player.Enable();
+        }
+
+         void OnDisable()
+        {
+            base.OnDisable();
+            _playerControls.Player.Disable();
+        }
+
         void Awake()
         {
             health = GetComponent<Health>();
@@ -99,34 +122,71 @@ namespace Platformer.Mechanics
             //_gravityModifier = GetComponent<gra
             _transform = this.transform;
             rewindSaveInfo = GetComponent<RewindSaveInfo>();
+             _playerControls = new PlayerControls();
+
+            dashInputAction = _playerControls.Player.Dash;
+            dashInputAction.performed += OnDashInput;
+
+            jumpInputAction = _playerControls.Player.Jump;
+            jumpInputAction.performed += OnJumpInput;
+            jumpInputAction.canceled += OnJumpInput;
+
+            rewindInputAction = _playerControls.Player.Rewind;
+            rewindInputAction.performed += OnRewindInput;
+
+            createCloneInputAction = _playerControls.Player.CreateClone;
+            createCloneInputAction.performed += OnCreateCloneInput;
+
+            moveInputAction = _playerControls.Player.Move;
+            moveInputAction.performed += OnMoveInput;
+            moveInputAction.canceled += OnMoveInput;
+        }
+
+        private void OnMoveInput(InputAction.CallbackContext context)
+        {
+            move = context.ReadValue<Vector2>();
+        }
+
+        private void OnJumpInput(InputAction.CallbackContext context)
+        {
+            _jumppress = context.ReadValue<float>();
+        }
+
+        private void OnDashInput(InputAction.CallbackContext context)
+        {
+            if (canDash)
+            {
+                StartCoroutine("Dash");
+            }
+        }
+
+        private void OnRewindInput(InputAction.CallbackContext context)
+        {
+            if (_onRewind == true)
+            {
+                StopRewinding();
+            }
+            else
+            {
+                StartRewinding();
+            }
+        }
+
+        private void OnCreateCloneInput(InputAction.CallbackContext context)
+        {
+            if(_onRewind == true)
+                CreateClone();
         }
 
         protected override void Update()
         {
-            _facingDirection = Input.GetAxis("Horizontal") != 0 ? Input.GetAxis("Horizontal") : _facingDirection;
+            _facingDirection = move.x != 0 ? move.x : _facingDirection;
 
             if (isDashing)
             {
                 return;
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
-            {
-                StartCoroutine("Dash");
-            }
-
-            if (Input.GetKeyDown(KeyCode.C) && (_onRewind == true))
-            {
-                StopRewinding();
-            }
-            else if (Input.GetKeyDown(KeyCode.C) && (_onRewind == false))
-            {
-                StartRewinding();
-            } 
-            else if (Input.GetKeyDown(KeyCode.LeftControl) && (_onRewind == true))
-            {
-                CreateClone();
-            }
 
             else
             {
@@ -147,10 +207,10 @@ namespace Platformer.Mechanics
 
             if (controlEnabled)
             {
-                move.x = Input.GetAxis("Horizontal");
-                if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
+                //move.x = Input.GetAxis("Horizontal");
+                if (jumpState == JumpState.Grounded && _jumppress == 1)
                     jumpState = JumpState.PrepareToJump;
-                else if (Input.GetButtonUp("Jump"))
+                else if (_jumppress == 0)
                 {
                     stopJump = true;
                     Schedule<PlayerStopJump>().player = this;
@@ -164,7 +224,7 @@ namespace Platformer.Mechanics
             base.Update();
         }
 
-        
+
 
         public void StartRewinding()
         {
@@ -207,7 +267,7 @@ namespace Platformer.Mechanics
             //controlEnabled = true;
             //staticPlayerOnRewind.Destroy();
 
-            
+
 
             //go trough the list of clones and destroy them
             //Debug.Log(gameObject.name);
@@ -298,6 +358,7 @@ namespace Platformer.Mechanics
 
             gravityModifier = 0f;
             //_rigidbody2D.velocity += new Vector2(dashAmount, 0);
+            base.velocity.y = 0;
             PerformMovement(new Vector2(dashAmount, 0), false);
             tr.emitting = true;
             yield return new WaitForSeconds(dashingTime);
@@ -323,8 +384,8 @@ namespace Platformer.Mechanics
 
             _clones = new List<PlayerOnRewind>();
 
-            
-             if (_playerOnRewind != null)
+
+            if (_playerOnRewind != null)
             {
                 _transform.position = _playerOnRewind.transform.position;
                 _timeManager.RewindAllAffectedObjects();
