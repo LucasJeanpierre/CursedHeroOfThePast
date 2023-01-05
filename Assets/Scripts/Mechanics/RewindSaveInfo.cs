@@ -24,7 +24,7 @@ public class RewindSaveInfo : MonoBehaviour
         _transform = GetComponent<Transform>();
         if (!_timeManager.getOnRewind())
         {
-            Debug.Log("Add");
+            // Debug.Log("Add");
             IncrementRewindingList();
         }
     }
@@ -32,7 +32,7 @@ public class RewindSaveInfo : MonoBehaviour
 
     public void IncrementRewindingList()
     {
-        Debug.Log("IncrementRewindingList");
+        // Debug.Log("IncrementRewindingList");
         AddTimeRewindObject(CreateTimeRewindObject(), _timeManager.GetCustomTime());
     }
 
