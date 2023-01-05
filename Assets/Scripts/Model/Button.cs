@@ -29,7 +29,7 @@ public class Button : MonoBehaviour
         _animator= GetComponent<Animator>();
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionStay2D(Collision2D other)
     {
          Collider2D playerCollider = other.gameObject.GetComponent<Collider2D>();
          _isAbove= collideAbove(playerCollider);
@@ -39,6 +39,8 @@ public class Button : MonoBehaviour
          }
         
     }
+
+   
 
     public void PressButton()
     {

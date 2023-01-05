@@ -74,6 +74,7 @@ MonoBehaviour:
   tr: {fileID: -4462045721549992892}
   _cinemachineTargetGroup: {fileID: 0}
   delayBetweenClones: 0.02
+  timeRewindLimitTeleport: 0
 --- !u!212 &212064061491315838
 SpriteRenderer:
   m_ObjectHideFlags: 0
