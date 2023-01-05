@@ -69,8 +69,8 @@ public class Button : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // UpdateCollider();
-        // Debug.Log(isPressed);
+        UpdateCollider();
+        // Debug.Log(_isPressed);
         _isPressed= !(_left);
         _animator.SetBool("Button_Pressed",_isPressed);
     }
