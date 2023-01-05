@@ -87,12 +87,12 @@ public class Button : MonoBehaviour
     {
         
         // GetComponent<SpriteRenderer>().color = Color.blue;
-        if (!_isAbove){
+        // if (!_isAbove){
             _isPressed=false;
             _animator.SetBool("Button_Pressed",_isPressed);
             _left=true;
             _animator.SetBool("Someone_Left",_left);
-        }
+        // }
         
     }
 
