@@ -130,6 +130,8 @@ MonoBehaviour:
   _cinemachineTargetGroup: {fileID: 0}
   _buttonList: []
   cameraSpeed: 0.005
+  _toBeOpen: 0
+  _isMiddleDoor: 0
 --- !u!82 &-8722802296450464814
 AudioSource:
   m_ObjectHideFlags: 0

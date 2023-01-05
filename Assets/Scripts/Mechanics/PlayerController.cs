@@ -253,9 +253,9 @@ namespace Platformer.Mechanics
                 return;
             }
             PlayerOnRewind clone = Instantiate(__playerOnRewind, _playerOnRewind.transform.position, _playerOnRewind.transform.rotation);
-            // clone.setRewindSaveInfo(rewindSaveInfo);
-            // clone.setTimeManager(_timeManager);
-            // clone.setPlayerController(this);
+            //clone.setRewindSaveInfo(rewindSaveInfo);
+            //clone.setTimeManager(_timeManager);
+            //clone.setPlayerController(this);
             clone.setIsStatic(true);
 
             _clones.Add(clone);
