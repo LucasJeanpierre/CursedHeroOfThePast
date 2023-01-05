@@ -8,7 +8,7 @@ public class TimeManager : MonoBehaviour
 
     [SerializeField] private float _time = 0.0f;
 
-    [SerializeField] private float _timeRewindLimit = 10.0f;
+    [SerializeField] public float _timeRewindLimit = 10.0f;
 
     private float _maxTime = 0.0f;
 
@@ -33,7 +33,8 @@ public class TimeManager : MonoBehaviour
 
         _gameCustomTime = (float) System.Math.Round(_gameCustomTime, 2);
 
-        Debug.Log(_gameCustomTime);
+        Debug.Log("Game Max Time: " + _maxTime);
+        Debug.Log("Game Custom Time: " + _gameCustomTime);
     }
 
     
