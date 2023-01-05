@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Obsidian_ground
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: feeedfa108460fa4687c69df2a2b5902, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 63646370e46d5244e9341ef68a1349f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

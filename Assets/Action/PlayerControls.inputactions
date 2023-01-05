@@ -98,6 +98,17 @@
                 },
                 {
                     "name": "",
+                    "id": "b4255c57-6182-4cf7-b571-5f2cbf8039a4",
+                    "path": "<XInputController>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "0985cc9e-b0e5-4788-9db6-1c3c60821dc3",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",

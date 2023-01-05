@@ -48,6 +48,10 @@ namespace Platformer.Mechanics
         public Health health;
         public bool controlEnabled = true;
 
+        public int maxNumberOfClones = 1;
+
+        private int _numberOfClones = 0;
+
 
         bool jump;
         Vector2 move;
@@ -93,7 +97,7 @@ namespace Platformer.Mechanics
         [SerializeField] private CinemachineTargetGroup _cinemachineTargetGroup;
 
 
-        [SerializeField] private float delayBetweenClones = 0.02f;
+        [SerializeField] private float delayBetweenClones = 0.05f;
 
         //private GravityModifier _gravityModifier;
 
@@ -244,13 +248,18 @@ namespace Platformer.Mechanics
 
         public void CreateClone()
         {
+            if (_clones.Count >= maxNumberOfClones)
+            {
+                return;
+            }
             PlayerOnRewind clone = Instantiate(__playerOnRewind, _playerOnRewind.transform.position, _playerOnRewind.transform.rotation);
-            // clone.setRewindSaveInfo(rewindSaveInfo);
-            // clone.setTimeManager(_timeManager);
-            // clone.setPlayerController(this);
+            //clone.setRewindSaveInfo(rewindSaveInfo);
+            //clone.setTimeManager(_timeManager);
+            //clone.setPlayerController(this);
             clone.setIsStatic(true);
 
             _clones.Add(clone);
+            _numberOfClones++;
         }
 
         public void StopRewinding()
