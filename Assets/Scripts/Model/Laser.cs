@@ -21,7 +21,8 @@ namespace Platformer.Gameplay
 
         // Shooting propriety
         public float startAfter = 1.0f;
-        public float shootRate = 1.0f;
+        public float shootOnTime = 1.0f;
+        public float shootOffTime = 1.0f;
 
         // Rotating propriety
         public bool rotateLaser = false;
@@ -37,7 +38,8 @@ namespace Platformer.Gameplay
         {
             FillLists();
             DisableLaser();
-            InvokeRepeating("LaunchLaser", startAfter, shootRate);
+            InvokeRepeating("LaunchLaser", startAfter, shootOnTime + shootOffTime);
+            InvokeRepeating("OffLaser", startAfter + shootOnTime, shootOnTime + shootOffTime);
         }
 
 
@@ -66,15 +68,19 @@ namespace Platformer.Gameplay
 
         void LaunchLaser()
         {
+            if (_laserShooting == false)
+            {
+                EnableLaser();
+                _laserShooting = true;
+            }
+        }
+
+        void OffLaser()
+        {
             if (_laserShooting)
             {
                 DisableLaser();
                 _laserShooting = false;
-            }
-            else
-            {
-                EnableLaser();
-                _laserShooting = true;
             }
         }
 
