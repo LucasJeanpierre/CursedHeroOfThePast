@@ -19,7 +19,7 @@ public class Button : MonoBehaviour
 
 
     // private int nbcollision = 0;
-    [SerializeField] private float _buttonDelayOnRelease = 4f;
+    [SerializeField] private float _buttonDelayOnRelease ;
 
     
     
@@ -39,6 +39,7 @@ public class Button : MonoBehaviour
     {
         _isAbove=true;
         _left=false;
+        StopCoroutine("unPressButtonAfterDelay");
         // GetComponent<SpriteRenderer>().color = Color.red;
         _animator.SetBool("Someone_Above",_isAbove);
         _animator.SetBool("Someone_Left",_left);
@@ -52,11 +53,13 @@ public class Button : MonoBehaviour
         _isAbove=false;
         _animator.SetBool("Someone_Above",_isAbove);
         // Debug.Log(other.gameObject.tag);
-        if (other.gameObject.tag == "Player")
-        {
-            StartCoroutine("unPressButtonAfterDelay");
-        }
+        // if (other.gameObject.tag == "Player")
+        // {
+        //     StartCoroutine("unPressButtonAfterDelay");
+        // }
         StartCoroutine("unPressButtonAfterDelay");
+        
+        
         //  isPressed=false;
         // _animator.SetBool("Someone_Above",isPressed );
     }
@@ -83,13 +86,16 @@ public class Button : MonoBehaviour
             _left=true;
             _animator.SetBool("Someone_Left",_left);
         }
+        
     }
 
     public IEnumerator unPressButtonAfterDelay()
     {
+        
         yield return new WaitForSeconds(_buttonDelayOnRelease);
 
         unPressButton();
+
     }
 
     
