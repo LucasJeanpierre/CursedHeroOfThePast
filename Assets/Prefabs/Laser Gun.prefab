@@ -177,6 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 4113036961494076034}
+  _scaleUpSpeed: 0.0025
   _endWidth: 0.2
 --- !u!1 &7593526519011240303
 GameObject:
@@ -229,7 +230,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  lineRenderer: {fileID: 7593526519247356060}
+  lineRendererLaser: {fileID: 7593526519247356060}
+  lineRendererCharge: {fileID: 4113036961494076034}
   firePoint: {fileID: 7593526519562713815}
   StartVFX: {fileID: 7593526520465871417}
   EndVFX: {fileID: 7593526520183866266}
@@ -238,6 +240,8 @@ MonoBehaviour:
   shootOffTime: 1
   rotateLaser: 0
   rotateSpeed: 0.5
+  _scaleUpSpeedCharge: 0.0025
+  _endWidthCharge: 0.2
 --- !u!114 &3012050406829600077
 MonoBehaviour:
   m_ObjectHideFlags: 0

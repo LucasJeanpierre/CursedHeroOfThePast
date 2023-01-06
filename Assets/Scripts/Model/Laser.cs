@@ -12,7 +12,8 @@ namespace Platformer.Gameplay
     {
         // Laser variables
         public Camera cam;
-        public LineRenderer lineRenderer;
+        public LineRenderer lineRendererLaser;
+        public LineRenderer lineRendererCharge;
         public Transform firePoint;
 
         // Effects
@@ -28,11 +29,15 @@ namespace Platformer.Gameplay
         public bool rotateLaser = false;
         public float rotateSpeed = 0.5f;
 
-        private Quaternion rotation;
         private bool _laserShooting = false;
 
+        // VFX
         private List<ParticleSystem> particles = new List<ParticleSystem>();
-
+        private bool _timeToLaunch = false;
+        public float _scaleUpSpeedCharge = 0.0025f;
+        private float _delayBeforeCharge = 0.5f;
+        public float _endWidthCharge = 0.2f;
+        private float _widthCharge = 0f;
 
         void Start()
         {
@@ -40,6 +45,10 @@ namespace Platformer.Gameplay
             DisableLaser();
             InvokeRepeating("LaunchLaser", startAfter, shootOnTime + shootOffTime);
             InvokeRepeating("OffLaser", startAfter + shootOnTime, shootOnTime + shootOffTime);
+            // VFX
+            InvokeRepeating("LaunchVFX", startAfter - _delayBeforeCharge, shootOnTime + shootOffTime);
+            _delayBeforeCharge = shootOffTime / 2;
+            lineRendererCharge.SetWidth(_widthCharge, _widthCharge);
         }
 
 
@@ -49,6 +58,8 @@ namespace Platformer.Gameplay
         {
             if (_laserShooting)
                 UpdateLaser();
+            if (_timeToLaunch)
+                UpdateCharge();
             if (rotateLaser)
             {
                 Vector3 rotationToAdd = new Vector3(0, 0, rotateSpeed * Time.deltaTime);
@@ -59,7 +70,7 @@ namespace Platformer.Gameplay
         void EnableLaser()
         {
             // Enable beam
-            lineRenderer.enabled = true;
+            lineRendererLaser.enabled = true;
 
             // Enable particles
             for (int i = 0; i < particles.Count; i++)
@@ -75,6 +86,11 @@ namespace Platformer.Gameplay
             }
         }
 
+        void LaunchVFX()
+        {
+            _timeToLaunch = true;
+        }
+
         void OffLaser()
         {
             if (_laserShooting)
@@ -84,22 +100,43 @@ namespace Platformer.Gameplay
             }
         }
 
-        void UpdateLaser()
+        void UpdateCharge()
         {
-            // Create a ray going down to check colision
             RaycastHit2D hit = Physics2D.Raycast((Vector2)firePoint.position, transform.right);
-            
-            //Debug.Log("Forward gun: " + transform.right);
-            //Debug.Log("Forward pointer: " + firePoint.forward);
 
             if (hit)
             {
                 // Set start of laser in the gun pointer
-                lineRenderer.SetPosition(0, (Vector2)firePoint.position);
+                lineRendererCharge.SetPosition(0, (Vector2)firePoint.position);
+                // Set end of laser in the raycast hit position
+                lineRendererCharge.SetPosition(1, hit.point);
+
+                // Update VFX size
+                lineRendererCharge.SetWidth(_widthCharge, _widthCharge);
+                _widthCharge += _scaleUpSpeedCharge;
+                if (_widthCharge >= _endWidthCharge)
+                {
+                    lineRendererCharge.SetWidth(0, 0);
+                    _timeToLaunch = false;
+                    _widthCharge = 0;
+                }
+
+            }
+        }
+
+        void UpdateLaser()
+        {
+            // Create a ray going down to check colision
+            RaycastHit2D hit = Physics2D.Raycast((Vector2)firePoint.position, transform.right);
+
+            if (hit)
+            {
+                // Set start of laser in the gun pointer
+                lineRendererLaser.SetPosition(0, (Vector2)firePoint.position);
                 StartVFX.transform.position = (Vector2)firePoint.position;
                 // Set end of laser in the raycast hit position
-                lineRenderer.SetPosition(1, hit.point);
-                EndVFX.transform.position = (Vector2)lineRenderer.GetPosition(1);
+                lineRendererLaser.SetPosition(1, hit.point);
+                EndVFX.transform.position = (Vector2)lineRendererLaser.GetPosition(1);
                 // If laser hits player
                 if (hit.transform.name == "Player")
                     Schedule<PlayerDeath>();
@@ -115,28 +152,21 @@ namespace Platformer.Gameplay
         void DisableLaser()
         {
             // Reset laser line
-            lineRenderer.SetPosition(0, new Vector2(0, 0));
-            lineRenderer.SetPosition(1, new Vector2(0, 0));
+            lineRendererLaser.SetPosition(0, new Vector2(0, 0));
+            lineRendererLaser.SetPosition(1, new Vector2(0, 0));
 
             // Disable beam
-            lineRenderer.enabled = false;
+            lineRendererLaser.enabled = false;
 
             // Disable particles
             for (int i = 0; i < particles.Count; i++)
                 particles[i].Stop();
         }
 
-        void RotateToMouse()
-        {
-            Vector2 direction = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            rotation.eulerAngles = new Vector3(0, 0, angle);
-            transform.rotation = rotation;
-        }
 
         void FillLists()
         {
-            for(int i = 0; i < StartVFX.transform.childCount; i++)
+            for (int i = 0; i < StartVFX.transform.childCount; i++)
             {
                 var ps = StartVFX.transform.GetChild(i).GetComponent<ParticleSystem>();
                 if (ps != null)

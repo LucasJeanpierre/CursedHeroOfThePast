@@ -33,8 +33,8 @@ public class TimeManager : MonoBehaviour
 
         _gameCustomTime = (float) System.Math.Round(_gameCustomTime, 2);
 
-        Debug.Log("Game Max Time: " + _maxTime);
-        Debug.Log("Game Custom Time: " + _gameCustomTime);
+        // Debug.Log("Game Max Time: " + _maxTime);
+        // Debug.Log("Game Custom Time: " + _gameCustomTime);
     }
 
     
@@ -61,7 +61,7 @@ public class TimeManager : MonoBehaviour
 
     public void RewindAllAffectedObjects()
     {
-        Debug.Log("rewind all objects  " + _gameCustomTime);
+        // Debug.Log("rewind all objects  " + _gameCustomTime);
         foreach (var rewindObject in _ListOfRewindObjects)
         {
             rewindObject.GetComponent<RewindSaveInfo>().RewindTo(_gameCustomTime);

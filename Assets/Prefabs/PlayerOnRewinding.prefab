@@ -66,6 +66,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   health: {fileID: 0}
   controlEnabled: 1
+  maxNumberOfClones: 1
   __playerOnRewind: {fileID: 0}
   _timeManager: {fileID: 0}
   dashingPower: 2
@@ -153,7 +154,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208144871472054}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0

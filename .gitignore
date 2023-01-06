@@ -62,3 +62,4 @@ sysinfo.txt
 crashlytics-build.properties
 *.dwlt
 Assets/Scenes/Levels/LVL1.3.unity
+ProjectSettings/ProjectSettings.asset
