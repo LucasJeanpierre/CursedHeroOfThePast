@@ -108,7 +108,7 @@ namespace Platformer.Gameplay
             if (hit)
             {
                 EnableLaser();
-                
+
                 // Set start of laser in the gun pointer
                 lineRenderer.SetPosition(0, (Vector2)firePoint.position);
                 StartVFX.transform.position = (Vector2)firePoint.position;
@@ -118,12 +118,25 @@ namespace Platformer.Gameplay
 
                 if (hit.collider.gameObject.tag == "LightTarget")
                 {
-                    Debug.Log("Hit target");
-                    _LastPressedButton = hit.collider.gameObject.GetComponent<Button>();
-                    hit.collider.gameObject.GetComponent<LightTarget>().PressButton();
-                } else {
-                    if (_LastPressedButton != null) {
+                    //Debug.Log("Hit target");
+                    if (hit.collider.gameObject.GetComponent<Button>() != _LastPressedButton)
+                    {
+                        _LastPressedButton = hit.collider.gameObject.GetComponent<Button>();
+                        hit.collider.gameObject.GetComponent<LightTarget>().PressButton();
+                        hit.collider.gameObject.GetComponent<LightTarget>().getAnimator().SetBool("Button_Pressed", true);
+                        hit.collider.gameObject.GetComponent<LightTarget>().getAnimator().SetBool("Someone_Above", true);
+                        hit.collider.gameObject.GetComponent<LightTarget>().getAnimator().SetBool("Someone_Left", false);
+                    }
+
+                }
+                else
+                {
+                    if (_LastPressedButton != null)
+                    {
                         _LastPressedButton.unPressButton();
+                        _LastPressedButton.getAnimator().SetBool("Someone_Above", false);
+                        _LastPressedButton.getAnimator().SetBool("Button_Pressed", false);
+                        _LastPressedButton.getAnimator().SetBool("Someone_Left", true);
                         _LastPressedButton = null;
                     }
                 }

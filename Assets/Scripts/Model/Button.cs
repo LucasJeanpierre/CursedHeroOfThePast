@@ -44,7 +44,6 @@ public class Button : MonoBehaviour
 
     public void PressButton()
     {
-        
         _isPressed=true;
         _animator.SetBool("Button_Pressed",_isPressed);
         StopCoroutine("unPressButtonAfterDelay");
@@ -87,7 +86,6 @@ public class Button : MonoBehaviour
 
     public void unPressButton()
     {
-        
         // GetComponent<SpriteRenderer>().color = Color.blue;
         // if (!_isAbove){
             _isPressed=false;
@@ -146,6 +144,10 @@ public class Button : MonoBehaviour
         
 
 
+    }
+
+    public Animator getAnimator(){
+        return _animator;
     }
 
 

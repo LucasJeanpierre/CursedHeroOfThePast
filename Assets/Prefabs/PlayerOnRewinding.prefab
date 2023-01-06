@@ -66,6 +66,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   health: {fileID: 0}
   controlEnabled: 1
+  maxNumberOfClones: 1
   __playerOnRewind: {fileID: 0}
   _timeManager: {fileID: 0}
   dashingPower: 2
@@ -285,7 +286,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0033810139, y: -0.0033619404}
