@@ -26,6 +26,7 @@ public class MenuPanel : MonoBehaviour
     }
 
     public void ChangeState(bool newState){
+        Debug.Log("ChangeState: " + newState+ " " + panelType);
         state = newState;
         UpdateState();
     }

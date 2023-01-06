@@ -385,8 +385,8 @@ RectTransform:
   m_Father: {fileID: 1515010098}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -499,7 +499,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -574,8 +574,8 @@ RectTransform:
   m_Father: {fileID: 7512418499764785280}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1168,7 +1168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06518cdde16506d4883f04731d0c9391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelType: 4
+  panelType: 3
 --- !u!1 &4811512291278904003
 GameObject:
   m_ObjectHideFlags: 0
@@ -2002,7 +2002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06518cdde16506d4883f04731d0c9391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelType: 2
+  panelType: 1
 --- !u!1 &5530165966898190920
 GameObject:
   m_ObjectHideFlags: 0
@@ -2678,7 +2678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06518cdde16506d4883f04731d0c9391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelType: 3
+  panelType: 2
 --- !u!1 &5530165967607662419
 GameObject:
   m_ObjectHideFlags: 0
@@ -2833,7 +2833,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5530165967678027651
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2914,7 +2914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c20b8203aa8f434ca60ac8f6c6343b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelType: 3
+  panelType: 2
 --- !u!1 &5530165967727506217
 GameObject:
   m_ObjectHideFlags: 0
@@ -3082,7 +3082,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5530165967823901808
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3164,7 +3164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c20b8203aa8f434ca60ac8f6c6343b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelType: 2
+  panelType: 1
 --- !u!114 &1564809844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3300,7 +3300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c20b8203aa8f434ca60ac8f6c6343b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelType: 1
+  panelType: 0
 --- !u!1 &5530165968082536161
 GameObject:
   m_ObjectHideFlags: 0
@@ -3568,7 +3568,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: LVL1.0
+          m_StringArgument: LevelSelection
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &5530165968528222027
@@ -4437,7 +4437,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4537,7 +4537,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4112835738707529434
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4620,7 +4620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c20b8203aa8f434ca60ac8f6c6343b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panelType: 4
+  panelType: 3
 --- !u!114 &9161311552358228014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4649,7 +4649,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 324bf554ae740489599adf96b783989f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Videogame: 4
   Feedback: {fileID: 9195147662089375848}
   mainMenuController: {fileID: 5530165966959317129}
 --- !u!1 &8272184335153003761

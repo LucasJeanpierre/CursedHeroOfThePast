@@ -25,14 +25,14 @@ namespace Platformer.UI
         /// </summary>
         public GameController gameController;
 
-        bool showMainCanvas = false;
+        public bool isMainMenuScene;
 
         private void Awake() {
             mainMenu.SetActive(false);
         }
         void OnEnable()
         {
-            _ToggleMainMenu(showMainCanvas);
+            _ToggleMainMenu(isMainMenuScene);
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Platformer.UI
         /// <param name="show"></param>
         public void ToggleMainMenu(bool show)
         {
-            if (this.showMainCanvas != show)
+            if (this.isMainMenuScene != show)
             {
                 _ToggleMainMenu(show);
             }
@@ -51,25 +51,29 @@ namespace Platformer.UI
         {
             if (show)
             {
-                Time.timeScale = 0;
+                if(!isMainMenuScene){
+                    Time.timeScale = 0;
+                }
                 mainMenu.gameObject.SetActive(true);
                 foreach (var i in gamePlayCanvasii) i.gameObject.SetActive(false);
             }
             else
             {
-                Time.timeScale = 1;
+                if(!isMainMenuScene){
+                    Time.timeScale = 1;
+                }
                 mainMenu.gameObject.SetActive(false);
                 foreach (var i in gamePlayCanvasii) i.gameObject.SetActive(true);
             }
-            this.showMainCanvas = show;
+            this.isMainMenuScene = show;
         }
 
         void Update()
         {
-            if (Input.GetButtonDown("Menu"))
+            if (Input.GetButtonDown("Menu") && !isMainMenuScene)
             {
-                Debug.Log("Menu button pressed"+showMainCanvas);
-                ToggleMainMenu(show: !showMainCanvas);
+                Debug.Log("Menu button pressed"+isMainMenuScene);
+                ToggleMainMenu(show: !isMainMenuScene);
             }
         }
 

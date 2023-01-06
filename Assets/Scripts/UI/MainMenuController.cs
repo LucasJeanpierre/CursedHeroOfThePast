@@ -5,7 +5,6 @@ using UnityEngine;
 using Platformer.Mechanics;
 
 public enum PanelType{
-    None,
     Main,
     Options,
     Credits,
@@ -31,6 +30,7 @@ public class MainMenuController : MonoBehaviour
         {
             if(panel){
                 panelsDict.Add(panel.GetPanelType(), panel);
+                Debug.Log("Add Panel: " + panel.GetPanelType());
             }
         }
 
@@ -38,12 +38,14 @@ public class MainMenuController : MonoBehaviour
     }
 
     private void OpenOnePanel(PanelType panelType){
+        foreach (MenuPanel panel in panelsDict.Values){
+            Debug.Log("For Panel to false: " + panel.GetPanelType()+ " False");
+            panel.ChangeState(false);
+        } 
 
-        foreach (MenuPanel panel in panelsDict.Values) panel.ChangeState(false);
-        
-        if(panelType != PanelType.None){
-            panelsDict[panelType].ChangeState(true);
-        }
+        Debug.Log("Set choosen Panel to true: " + panelType+ " False");
+        panelsDict[panelType].ChangeState(true);
+
 
     }
     public void OpenPanel(PanelType panelType){
