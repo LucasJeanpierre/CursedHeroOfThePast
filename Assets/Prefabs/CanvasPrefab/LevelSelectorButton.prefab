@@ -125,7 +125,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1899188751025883717}
         m_TargetAssemblyTypeName: LevelSelector, Assembly-CSharp
-        m_MethodName: openScene
+        m_MethodName: selectALevel
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -147,6 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98628513068f8754a8552e1db0ddd024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldSelector: {fileID: 0}
+  world1LevelsSelector: {fileID: 0}
+  world2LevelsSelector: {fileID: 0}
 --- !u!1 &6898450560259886513
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +243,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.17
+  m_fontSize: 4.16
   m_fontSizeBase: 25.91
   m_fontWeight: 400
   m_enableAutoSizing: 1

@@ -7,38 +7,50 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelector : MonoBehaviour
 {
-    public GameObject world1Grid;
-    public GameObject world2Grid;
+    public GameObject worldSelector;
+    public GameObject world1LevelsSelector;
+    public GameObject world2LevelsSelector;
+    public GameObject world3LevelsSelector;
+    public bool isWorldSelector = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    void Awake(){
+        if(isWorldSelector){
+            showWorldsSelector();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void showWorldsSelector()
     {
-        
+        worldSelector.SetActive(true);
+        world1LevelsSelector.SetActive(false);
+        world2LevelsSelector.SetActive(false);
+        world3LevelsSelector.SetActive(false);
     }
 
-    public void selectLevel(string sceneName)
+    public void selectALevel(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
     }
 
     public void selectWorld(int world)
     {
-
+        worldSelector.SetActive(false);
         if (world == 1)
         {
-            world1Grid.SetActive(true);
-            world2Grid.SetActive(false);
+            world1LevelsSelector.SetActive(true);
+            world2LevelsSelector.SetActive(false);
+            world3LevelsSelector.SetActive(false);
         }
         else if (world == 2)
         {
-            world1Grid.SetActive(false);
-            world2Grid.SetActive(true);
+            world1LevelsSelector.SetActive(false);
+            world2LevelsSelector.SetActive(true);
+            world3LevelsSelector.SetActive(false);
+        } else if (world == 3)
+        {
+            world1LevelsSelector.SetActive(false);
+            world2LevelsSelector.SetActive(false);
+            world3LevelsSelector.SetActive(true);
         }
     }
 

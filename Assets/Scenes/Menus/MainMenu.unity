@@ -770,12 +770,12 @@ PrefabInstance:
     - target: {fileID: 8198101733832056027, guid: ee7bb0eeca439034abd43f2284c07e36,
         type: 3}
       propertyPath: m_text
-      value: 'Give Feedback '
+      value: 'Give a feedback '
       objectReference: {fileID: 0}
     - target: {fileID: 8198101733832056027, guid: ee7bb0eeca439034abd43f2284c07e36,
         type: 3}
       propertyPath: m_fontSize
-      value: 24.55
+      value: 23.65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee7bb0eeca439034abd43f2284c07e36, type: 3}

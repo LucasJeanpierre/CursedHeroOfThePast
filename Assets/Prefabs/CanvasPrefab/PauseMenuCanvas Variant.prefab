@@ -42,6 +42,21 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5530165966898190922, guid: ee7bb0eeca439034abd43f2284c07e36,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530165966898190922, guid: ee7bb0eeca439034abd43f2284c07e36,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530165966898190922, guid: ee7bb0eeca439034abd43f2284c07e36,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: MainMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 5530165966959317134, guid: ee7bb0eeca439034abd43f2284c07e36,
         type: 3}
       propertyPath: m_Pivot.x
@@ -157,10 +172,25 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5530165967165978784, guid: ee7bb0eeca439034abd43f2284c07e36,
+        type: 3}
+      propertyPath: m_text
+      value: Quit to Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530165967165978784, guid: ee7bb0eeca439034abd43f2284c07e36,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 28.6
+      objectReference: {fileID: 0}
     - target: {fileID: 5530165967678027653, guid: ee7bb0eeca439034abd43f2284c07e36,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530165967727506219, guid: ee7bb0eeca439034abd43f2284c07e36,
+        type: 3}
+      propertyPath: panelType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5530165967823901818, guid: ee7bb0eeca439034abd43f2284c07e36,
         type: 3}
@@ -188,10 +218,20 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Resume
       objectReference: {fileID: 0}
+    - target: {fileID: 5530165968528222021, guid: ee7bb0eeca439034abd43f2284c07e36,
+        type: 3}
+      propertyPath: panelType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5530165968575146168, guid: ee7bb0eeca439034abd43f2284c07e36,
         type: 3}
       propertyPath: m_text
       value: Resume
+      objectReference: {fileID: 0}
+    - target: {fileID: 7304971841821599462, guid: ee7bb0eeca439034abd43f2284c07e36,
+        type: 3}
+      propertyPath: panelType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7334682802893629659, guid: ee7bb0eeca439034abd43f2284c07e36,
         type: 3}
@@ -206,7 +246,7 @@ PrefabInstance:
     - target: {fileID: 7771943583667241001, guid: ee7bb0eeca439034abd43f2284c07e36,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee7bb0eeca439034abd43f2284c07e36, type: 3}

@@ -22,6 +22,10 @@ public class MainMenuController : MonoBehaviour
     private GameController gameController;
 
     // Start is called before the first frame update
+    void Awake()
+    {
+        gameObject.SetActive(true);
+    }
     void Start()
     {
         gameController = GameController.Instance;
@@ -30,7 +34,6 @@ public class MainMenuController : MonoBehaviour
         {
             if(panel){
                 panelsDict.Add(panel.GetPanelType(), panel);
-                Debug.Log("Add Panel: " + panel.GetPanelType());
             }
         }
 
@@ -39,11 +42,9 @@ public class MainMenuController : MonoBehaviour
 
     private void OpenOnePanel(PanelType panelType){
         foreach (MenuPanel panel in panelsDict.Values){
-            Debug.Log("For Panel to false: " + panel.GetPanelType()+ " False");
             panel.ChangeState(false);
         } 
 
-        Debug.Log("Set choosen Panel to true: " + panelType+ " False");
         panelsDict[panelType].ChangeState(true);
 
 
