@@ -11,7 +11,7 @@ public class Button : MonoBehaviour
     private bool _isAbove = false;
     private bool _left = true;
 
-    private bool _isPressed = false;
+    public bool _isPressed = false;
     
 
 
