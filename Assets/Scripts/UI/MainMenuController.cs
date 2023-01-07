@@ -5,7 +5,6 @@ using UnityEngine;
 using Platformer.Mechanics;
 
 public enum PanelType{
-    None,
     Main,
     Options,
     Credits,
@@ -23,6 +22,10 @@ public class MainMenuController : MonoBehaviour
     private GameController gameController;
 
     // Start is called before the first frame update
+    void Awake()
+    {
+        gameObject.SetActive(true);
+    }
     void Start()
     {
         gameController = GameController.Instance;
@@ -38,12 +41,12 @@ public class MainMenuController : MonoBehaviour
     }
 
     private void OpenOnePanel(PanelType panelType){
+        foreach (MenuPanel panel in panelsDict.Values){
+            panel.ChangeState(false);
+        } 
 
-        foreach (MenuPanel panel in panelsDict.Values) panel.ChangeState(false);
-        
-        if(panelType != PanelType.None){
-            panelsDict[panelType].ChangeState(true);
-        }
+        panelsDict[panelType].ChangeState(true);
+
 
     }
     public void OpenPanel(PanelType panelType){
