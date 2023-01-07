@@ -1571,7 +1571,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.1638985, y: 1.1957716, z: -10}
+  m_LocalPosition: {x: 1.3379896, y: 1.1531802, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10786,7 +10786,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 7
-      m_TileSpriteIndex: 9
+      m_TileSpriteIndex: 12
       m_TileMatrixIndex: 0
       m_TileColorIndex: 5
       m_TileObjectToInstantiateIndex: 65535
@@ -10796,7 +10796,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 5
+      m_TileSpriteIndex: 11
       m_TileMatrixIndex: 0
       m_TileColorIndex: 10
       m_TileObjectToInstantiateIndex: 65535
@@ -10835,22 +10835,22 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 902570d0813e1a84fa78a75dd9c4d1c0, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 2
     m_Data: {fileID: 21300000, guid: 3465812411028744da16d1fe036e55ea, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 902570d0813e1a84fa78a75dd9c4d1c0, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: acb548a95c986274c8b92a9088942f2d, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 4
     m_Data:
@@ -11196,6 +11196,7 @@ MonoBehaviour:
   mainMenu: {fileID: 867465457}
   gamePlayCanvasii: []
   gameController: {fileID: 1754240607}
+  isMainMenuScene: 0
 --- !u!82 &1754240611
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11765,7 +11766,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.4786096, y: 1}
+    m_SensorSize: {x: 1.7739726, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -11782,7 +11783,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1946717923}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7299997, y: 0.5099999, z: -10}
+  m_LocalPosition: {x: -1.7299998, y: 0.5099999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11916,18 +11917,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3afefc0e068397648a7243b3cffce658, type: 3}
---- !u!114 &2017226722 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4148170092053456087, guid: 11ce454c07589ce459c67a151234ecbb,
-    type: 3}
-  m_PrefabInstance: {fileID: 4148170092567390828}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c70d66b1a179354893709455f444d60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2067073108
 GameObject:
   m_ObjectHideFlags: 0
@@ -12081,7 +12070,7 @@ PrefabInstance:
     - target: {fileID: 4944118042386974862, guid: 41a3d4472359eb4428210b6a047105c5,
         type: 3}
       propertyPath: nextLevel
-      value: LVL1.2
+      value: LVL3.0
       objectReference: {fileID: 0}
     - target: {fileID: 5961470185772513310, guid: 41a3d4472359eb4428210b6a047105c5,
         type: 3}
@@ -12231,7 +12220,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2017226722}
+      objectReference: {fileID: 0}
     - target: {fileID: 7309951540571395380, guid: 11ce454c07589ce459c67a151234ecbb,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName

@@ -2153,7 +2153,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.1726458, y: 1.8497154, z: -11}
+  m_LocalPosition: {x: 1.3292272, y: 1.8207251, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14443,6 +14443,7 @@ MonoBehaviour:
   mainMenu: {fileID: 1165720481}
   gamePlayCanvasii: []
   gameController: {fileID: 1754240607}
+  isMainMenuScene: 0
 --- !u!82 &1754240611
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15140,7 +15141,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.2337348, y: 1}
+    m_SensorSize: {x: 1.7739726, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -15157,7 +15158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1946717923}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.00000023841858, y: -0.00000010430813, z: -11}
+  m_LocalPosition: {x: 0.00000017881393, y: -0.00000008940697, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15476,7 +15477,7 @@ PrefabInstance:
     - target: {fileID: 4944118042386974862, guid: 41a3d4472359eb4428210b6a047105c5,
         type: 3}
       propertyPath: nextLevel
-      value: LVL1.7
+      value: LVL2.1
       objectReference: {fileID: 0}
     - target: {fileID: 5961470185772513310, guid: 41a3d4472359eb4428210b6a047105c5,
         type: 3}
