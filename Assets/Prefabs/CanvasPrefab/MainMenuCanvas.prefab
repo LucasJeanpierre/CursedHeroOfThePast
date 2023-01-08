@@ -3510,7 +3510,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Credits : \nGustavo Torrico, \nLucas Jean-Pierre, \nBaptiste Sourisseau,
-    \nLucas Fourest,\n"
+    \nLucas Fourest,\nTugce Sozen,\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 59b386f2f9a384041abe95c8929fa2ef, type: 2}
   m_sharedMaterial: {fileID: 3676036798074529872, guid: 59b386f2f9a384041abe95c8929fa2ef,
