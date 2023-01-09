@@ -709,7 +709,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: "Credits : \nGustavo Torrico, \nLucas Jeanpierre, \nBaptiste Sourisseau,
-        \nLucas Fourest, ..."
+        \nLucas Fourest,\nTugce Sozen,"
       objectReference: {fileID: 0}
     - target: {fileID: 5530165968225115760, guid: ee7bb0eeca439034abd43f2284c07e36,
         type: 3}
