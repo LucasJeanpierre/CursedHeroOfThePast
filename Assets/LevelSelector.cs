@@ -11,17 +11,19 @@ public class LevelSelector : MonoBehaviour
     public GameObject world1LevelsSelector;
     public GameObject world2LevelsSelector;
     public GameObject world3LevelsSelector;
-    public bool isWorldSelector = false;
+    // public bool isWorldSelector = false;
     private MenuSoundEffect gameMusicPlayer;
 
-    void Awake(){
-        if(isWorldSelector){
-            showWorldsSelector();
-        }
-
+    void Start(){
         gameMusicPlayer = MenuSoundEffect.Instance;
+        showWorldsSelector();   
     }
 
+    public void backToWorldsSelector()
+    {
+        gameMusicPlayer.PlaySoundButton();
+        showWorldsSelector();
+    }
     public void showWorldsSelector()
     {
         worldSelector.SetActive(true);

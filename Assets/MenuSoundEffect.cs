@@ -17,6 +17,7 @@ public class MenuSoundEffect : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("Awake SoundMenu Instant");
         if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
