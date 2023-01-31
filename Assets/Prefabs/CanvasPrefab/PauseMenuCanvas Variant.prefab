@@ -259,8 +259,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3191179024863850338}
-        m_TargetAssemblyTypeName: RestartButton, Assembly-CSharp
+      - m_Target: {fileID: 4039525827636708698}
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
         m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
@@ -630,6 +630,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5530165967607662413, guid: ee7bb0eeca439034abd43f2284c07e36,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 29.35
+      objectReference: {fileID: 0}
     - target: {fileID: 5530165967678027651, guid: ee7bb0eeca439034abd43f2284c07e36,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -788,6 +793,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee7bb0eeca439034abd43f2284c07e36, type: 3}
+--- !u!114 &4039525827636708698 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5530165966959317129, guid: ee7bb0eeca439034abd43f2284c07e36,
+    type: 3}
+  m_PrefabInstance: {fileID: 8408326001999599059}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d7b2ce90ad7124180bea0cc7c99d58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4039525829090302064 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5530165967858732451, guid: ee7bb0eeca439034abd43f2284c07e36,

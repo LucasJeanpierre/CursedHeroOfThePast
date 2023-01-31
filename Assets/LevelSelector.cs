@@ -12,11 +12,14 @@ public class LevelSelector : MonoBehaviour
     public GameObject world2LevelsSelector;
     public GameObject world3LevelsSelector;
     public bool isWorldSelector = false;
+    private MenuSoundEffect gameMusicPlayer;
 
     void Awake(){
         if(isWorldSelector){
             showWorldsSelector();
         }
+
+        gameMusicPlayer = MenuSoundEffect.Instance;
     }
 
     public void showWorldsSelector()
@@ -29,11 +32,13 @@ public class LevelSelector : MonoBehaviour
 
     public void selectALevel(string sceneName)
     {
+        gameMusicPlayer.PlaySoundButton();
         SceneManager.LoadScene(sceneName);
     }
 
     public void selectWorld(int world)
     {
+        gameMusicPlayer.PlaySoundInstance();
         worldSelector.SetActive(false);
         if (world == 1)
         {
