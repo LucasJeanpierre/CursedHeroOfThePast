@@ -35,7 +35,7 @@ namespace Platformer.Gameplay
 
         public Slider _slider;
 
-        private Button _LastPressedButton;
+        private LightTarget _LastPressedButton;
 
         //[SerializeField] private Button _targetButton;
 
@@ -119,13 +119,17 @@ namespace Platformer.Gameplay
                 if (hit.collider.gameObject.tag == "LightTarget")
                 {
                     //Debug.Log("Hit target");
-                    if (hit.collider.gameObject.GetComponent<Button>() != _LastPressedButton)
+                    if (hit.collider.gameObject.GetComponent<LightTarget>() != _LastPressedButton)
                     {
-                        _LastPressedButton = hit.collider.gameObject.GetComponent<Button>();
+                        if (_LastPressedButton != null)
+                        _LastPressedButton.unPressButtonAfterDelay();
+
+
+                        _LastPressedButton = hit.collider.gameObject.GetComponent<LightTarget>();
                         hit.collider.gameObject.GetComponent<LightTarget>().PressButton();
                         hit.collider.gameObject.GetComponent<LightTarget>().getAnimator().SetBool("Button_Pressed", true);
                         hit.collider.gameObject.GetComponent<LightTarget>().getAnimator().SetBool("Someone_Above", true);
-                        hit.collider.gameObject.GetComponent<LightTarget>().getAnimator().SetBool("Someone_Left", false);
+                        hit.collider.gameObject.GetComponent<LightTarget>().getAnimator().SetBool("Someone_Left", false);         
                     }
 
                 }
@@ -133,10 +137,10 @@ namespace Platformer.Gameplay
                 {
                     if (_LastPressedButton != null)
                     {
-                        _LastPressedButton.unPressButton();
-                        _LastPressedButton.getAnimator().SetBool("Someone_Above", false);
-                        _LastPressedButton.getAnimator().SetBool("Button_Pressed", false);
-                        _LastPressedButton.getAnimator().SetBool("Someone_Left", true);
+                        _LastPressedButton.unPressLightRayTargetAfterDelay();
+                        // _LastPressedButton.getAnimator().SetBool("Someone_Above", false);
+                        // _LastPressedButton.getAnimator().SetBool("Button_Pressed", false);
+                        // _LastPressedButton.getAnimator().SetBool("Someone_Left", true);
                         _LastPressedButton = null;
                     }
                 }

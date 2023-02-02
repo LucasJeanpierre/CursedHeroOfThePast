@@ -98,16 +98,12 @@ public class Button : MonoBehaviour
 
     public IEnumerator unPressButtonAfterDelay()
     {
-        
         yield return new WaitForSeconds(_buttonDelayOnRelease);
 
         unPressButton();
 
     }
 
-    
-
-    
 
 
     void UpdateCollider(){
@@ -148,6 +144,10 @@ public class Button : MonoBehaviour
 
     public Animator getAnimator(){
         return _animator;
+    }
+
+    public float getButtonDelayOnRelease(){
+        return _buttonDelayOnRelease;
     }
 
 
