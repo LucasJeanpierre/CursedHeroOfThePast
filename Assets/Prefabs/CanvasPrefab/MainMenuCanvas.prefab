@@ -1578,6 +1578,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5530165966959317129}
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
+        m_MethodName: SoundSendFeedback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4993885276128928881
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,9 +1627,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
-  m_Pivot: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -57, y: -22}
+  m_SizeDelta: {x: 66, y: 54}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &7172580373150165940
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1646,7 +1658,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0525793900d728a42936791a8a6de63b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6d6088174bb906b49ad8428526ee337b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1702,7 +1714,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7304971841821599462}
         m_TargetAssemblyTypeName: OpenPanelButton, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickBack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2856,10 +2868,10 @@ RectTransform:
   m_Father: {fileID: 5530165967858732451}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 29, y: -50}
-  m_SizeDelta: {x: 407.75, y: 299.2}
+  m_SizeDelta: {x: -348.25, y: 299.2}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5530165967607662412
 CanvasRenderer:
@@ -2917,7 +2929,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.45
+  m_fontSize: 27.9
   m_fontSizeBase: 25.47
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3097,9 +3109,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
-  m_Pivot: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -57, y: -22}
+  m_SizeDelta: {x: 66, y: 54}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5530165967727506212
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3128,7 +3140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0525793900d728a42936791a8a6de63b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6d6088174bb906b49ad8428526ee337b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3184,7 +3196,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5530165967727506219}
         m_TargetAssemblyTypeName: OpenPanelButton, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickBack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3510,7 +3522,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Credits : \nGustavo Torrico, \nLucas Jean-Pierre, \nBaptiste Sourisseau,
-    \nLucas Fourest,\n"
+    \nLucas Fourest,\nTugce Sozen,\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 59b386f2f9a384041abe95c8929fa2ef, type: 2}
   m_sharedMaterial: {fileID: 3676036798074529872, guid: 59b386f2f9a384041abe95c8929fa2ef,
@@ -3751,9 +3763,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
-  m_Pivot: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -57, y: -22}
+  m_SizeDelta: {x: 66, y: 54}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5530165968528222022
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3782,7 +3794,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0525793900d728a42936791a8a6de63b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6d6088174bb906b49ad8428526ee337b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3838,7 +3850,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5530165968528222021}
         m_TargetAssemblyTypeName: OpenPanelButton, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickBack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3958,9 +3970,9 @@ MonoBehaviour:
   m_fontSize: 30
   m_fontSizeBase: 30
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 10
+  m_fontSizeMax: 30
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -4586,10 +4598,10 @@ RectTransform:
   m_Father: {fileID: 5530165967858732451}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 63.7431, y: 0}
-  m_SizeDelta: {x: 127.4863, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8050915335656534148
 MonoBehaviour:
